@@ -94,7 +94,8 @@ class Translator:
                 [tokens],
                 beam_size=beam_size,
                 max_input_length=512,
-                max_decoding_length=512
+                max_decoding_length=256,  # Reduced to prevent repetition
+                repetition_penalty=1.2  # Penalize repetition
             )
             
             # Get the best translation
@@ -142,7 +143,8 @@ class Translator:
                 tokenized_inputs,
                 beam_size=beam_size,
                 max_input_length=512,
-                max_decoding_length=512
+                max_decoding_length=256,  # Reduced to prevent repetition
+                repetition_penalty=1.2  # Penalize repetition
             )
             
             # Detokenize results

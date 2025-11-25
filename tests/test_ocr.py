@@ -59,7 +59,7 @@ def test_ocr():
         for i, (bbox, text, confidence) in enumerate(results, 1):
             print(f"\n   Text {i}:")
             print(f"   - Content: '{text}'")
-            print(f"   - Confidence: {confidence:.2%}")
+            print(f"   - Confidence: {float(confidence)*100:.2f}%")
             print(f"   - Bounding box: {bbox}")
         
         # Test get_text_only method
