@@ -79,7 +79,8 @@ def setup_models(source_lang="en", target_lang="vi"):
             "ct2-transformers-converter",
             "--model", model_name,
             "--output_dir", str(models_dir),
-            "--quantization", "int8"  # Use int8 quantization for smaller size and faster inference
+            "--quantization", "int8",  # Use int8 quantization for smaller size and faster inference
+            "--force"
         ]
         
         print(f"\n   Running: {' '.join(cmd)}\n")

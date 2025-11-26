@@ -1,7 +1,7 @@
 mss>=9.0.1
-rapidocr-onnxruntime>=1.2.0,<1.3.0
-ctranslate2>=3.24.0
-sentencepiece>=0.1.99
+pytesseract>=0.3.10
+deep-translator>=1.11.0
+google-generativeai>=0.8.0
 PyQt6>=6.6.0
 numpy>=1.24.0
 opencv-python>=4.8.0

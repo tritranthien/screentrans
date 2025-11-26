@@ -79,6 +79,7 @@ class SnippingWidget(QWidget):
     def mousePressEvent(self, event):
         """Start selection"""
         if event.button() == Qt.MouseButton.LeftButton:
+            print(f"DEBUG: Mouse press at {event.pos()}")
             self.start_pos = event.pos()
             self.end_pos = event.pos()
             self.selecting = True
@@ -93,15 +94,20 @@ class SnippingWidget(QWidget):
     def mouseReleaseEvent(self, event):
         """Finish selection"""
         if event.button() == Qt.MouseButton.LeftButton and self.selecting:
+            print(f"DEBUG: Mouse release at {event.pos()}")
             self.selecting = False
             self.end_pos = event.pos()
             
             # Calculate final rectangle
             rect = QRect(self.start_pos, self.end_pos).normalized()
+            print(f"DEBUG: Selection rect: {rect}, size: {rect.width()}x{rect.height()}")
             
             # Only emit if we have a valid selection (at least 10x10 pixels)
             if rect.width() >= 10 and rect.height() >= 10:
+                print("DEBUG: Emitting region_selected")
                 self.region_selected.emit(rect.x(), rect.y(), rect.width(), rect.height())
+            else:
+                print("DEBUG: Selection too small, ignoring")
             
             # Close the snipping widget
             self.close()

@@ -1,0 +1,114 @@
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-26 17:39:47
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-26 17:43:56
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-26 18:05:04
+

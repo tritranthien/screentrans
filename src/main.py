@@ -3,15 +3,25 @@ Main entry point for Screen Translator application
 """
 
 import sys
+import os
 import multiprocessing as mp
 from multiprocessing import Queue
 from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PyQt6.QtCore import QTimer, Qt
 from PyQt6.QtGui import QIcon, QAction, QKeySequence
 
-from .pipeline import ProcessingPipeline
-from .ui.overlay import OverlayController
-from .ui.snipping import SnippingWidget
+# Enable High DPI scaling
+if hasattr(Qt.ApplicationAttribute, 'AA_EnableHighDpiScaling'):
+    QApplication.setAttribute(Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True)
+if hasattr(Qt.ApplicationAttribute, 'AA_UseHighDpiPixmaps'):
+    QApplication.setAttribute(Qt.ApplicationAttribute.AA_UseHighDpiPixmaps, True)
+
+# Set environment variable for Windows DPI awareness
+os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
+
+from pipeline import ProcessingPipeline
+from ui.overlay import OverlayController
+from ui.snipping import SnippingWidget
 
 
 class ScreenTranslatorApp:
@@ -82,21 +92,26 @@ class ScreenTranslatorApp:
         menu = QMenu()
         
         # Capture action
-        capture_action = QAction("Capture Region (Ctrl+Shift+S)", self.app)
+        capture_action = QAction("📸 Capture Region (Ctrl+Shift+S)", self.app)
         capture_action.triggered.connect(self.start_capture)
         menu.addAction(capture_action)
         
         menu.addSeparator()
         
+        # Settings action
+        settings_action = QAction("⚙️ Settings", self.app)
+        settings_action.triggered.connect(self.open_settings)
+        menu.addAction(settings_action)
+        
         # Clear translations action
-        clear_action = QAction("Clear Translations", self.app)
+        clear_action = QAction("🗑️ Clear Translations", self.app)
         clear_action.triggered.connect(self.overlay_controller.overlay.clear_translations)
         menu.addAction(clear_action)
         
         menu.addSeparator()
         
         # Quit action
-        quit_action = QAction("Quit", self.app)
+        quit_action = QAction("❌ Quit", self.app)
         quit_action.triggered.connect(self.quit_app)
         menu.addAction(quit_action)
         
@@ -123,31 +138,57 @@ class ScreenTranslatorApp:
         self.snipping_widget.region_selected.connect(self.on_region_selected)
         self.snipping_widget.show()
     
+    def open_settings(self):
+        """Open settings dialog"""
+        from ui.settings import SettingsDialog
+        
+        dialog = SettingsDialog()
+        dialog.exec()
+    
     def on_region_selected(self, x, y, width, height):
         """
         Handle region selection from snipping tool.
         
         Args:
-            x, y: Top-left corner coordinates
-            width, height: Region dimensions
+            x, y: Top-left corner coordinates (logical pixels)
+            width, height: Region dimensions (logical pixels)
         """
-        print(f"Region selected: ({x}, {y}, {width}, {height})")
+        print(f"DEBUG: Region selected (logical): ({x}, {y}, {width}, {height})")
         
+        if width <= 0 or height <= 0:
+            print("DEBUG: Invalid region dimensions!")
+            return
+
         # Show overlay again
         self.overlay_controller.show()
+        print("DEBUG: Overlay shown")
+        
+        # Calculate DPI scale factor
+        screen = QApplication.primaryScreen()
+        device_pixel_ratio = screen.devicePixelRatio()
+        print(f"DEBUG: Device Pixel Ratio: {device_pixel_ratio}")
+        
+        # Adjust coordinates for High DPI displays
+        x_phys = int(x * device_pixel_ratio)
+        y_phys = int(y * device_pixel_ratio)
+        w_phys = int(width * device_pixel_ratio)
+        h_phys = int(height * device_pixel_ratio)
+        
+        print(f"DEBUG: Region (physical): ({x_phys}, {y_phys}, {w_phys}, {h_phys})")
         
         # Send command to processing pipeline
-        self.command_queue.put({
+        command = {
             'type': 'process_region',
             'region': {
-                'x': x,
-                'y': y,
-                'width': width,
-                'height': height
+                'x': x_phys,
+                'y': y_phys,
+                'width': w_phys,
+                'height': h_phys
             }
-        })
+        }
+        self.command_queue.put(command)
         
-        print("Processing request sent to pipeline...")
+        print(f"DEBUG: Processing request sent to pipeline: {command}")
     
     def quit_app(self):
         """Quit the application cleanly"""

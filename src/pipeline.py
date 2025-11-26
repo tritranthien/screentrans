@@ -9,9 +9,9 @@ import numpy as np
 from typing import Dict, Any, Optional
 import time
 
-from .capture import ScreenCapture
-from .ocr_engine import OCREngine
-from .translator import Translator
+from capture import ScreenCapture
+# OCREngine and Translator will be imported lazily in initialize_engines()
+# to avoid loading heavy dependencies (PyTorch, etc.) at import time
 
 
 class ProcessingPipeline(Process):
@@ -49,6 +49,10 @@ class ProcessingPipeline(Process):
         This is done in the separate process to avoid blocking the UI.
         """
         try:
+            # Lazy import to avoid loading heavy dependencies at module import time
+            from ocr_engine import OCREngine
+            from translator import Translator
+            
             print("Initializing processing engines...")
             
             # Initialize screen capture
@@ -110,7 +114,43 @@ class ProcessingPipeline(Process):
             ocr_results = self.ocr_engine.detect_and_recognize(image)
             ocr_time = time.time() - ocr_start
             
+            # Log OCR results for debugging (both console and file)
+            log_lines = []
+            log_lines.append(f"\n{'='*60}")
+            log_lines.append(f"OCR DETECTED {len(ocr_results)} TEXT SEGMENTS:")
+            log_lines.append(f"{'='*60}")
+            
+            for i, (bbox, text, confidence) in enumerate(ocr_results):
+                line = f"{i+1}. '{text}' (confidence: {confidence:.2f})"
+                log_lines.append(line)
+            
+            if ocr_results:
+                # Show combined text
+                combined_text = " ".join([text for _, text, _ in ocr_results])
+                log_lines.append(f"\nCOMBINED TEXT:")
+                log_lines.append(f">>> {combined_text}")
+                log_lines.append(f"{'='*60}\n")
+            
+            # Print to console
+            for line in log_lines:
+                print(line)
+            
+            # Save to file
+            try:
+                with open("ocr_log.txt", "a", encoding="utf-8") as f:
+                    f.write("\n".join(log_lines) + "\n")
+                    f.write(f"Timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+            except:
+                pass
+            
             if not ocr_results:
+                print("No text detected in region")
+                # Save debug image
+                import cv2
+                debug_file = f"debug_no_text_{int(time.time())}.png"
+                cv2.imwrite(debug_file, image)
+                print(f"DEBUG: Saved captured image to {debug_file}")
+                
                 self.result_queue.put({
                     'type': 'result',
                     'region': region,
@@ -129,38 +169,53 @@ class ProcessingPipeline(Process):
             translations = []
             
             if self.translator.is_available():
-                # Extract texts for batch translation
+                # Extract all texts and combine them
                 texts_to_translate = [text for _, text, _ in ocr_results]
-                translated_texts = self.translator.translate_batch(texts_to_translate)
+                combined_text = " ".join(texts_to_translate)
+                
+                # Translate ONLY the combined text (full sentence)
+                # This gives much better translation quality than word-by-word
+                translated_full = self.translator.translate(combined_text)
+                
+                print(f"\nTRANSLATION:")
+                print(f"Original: {combined_text}")
+                print(f"Translated: {translated_full}\n")
             else:
-                # No translation available, use original texts
-                translated_texts = [text for _, text, _ in ocr_results]
+                # No translation available
+                translated_full = " ".join([text for _, text, _ in ocr_results])
             
             translate_time = time.time() - translate_start
             
             # Combine OCR results with translations
+            # For individual words, we keep original text (not translated)
+            # because word-by-word translation is inaccurate
             for i, (bbox, original_text, confidence) in enumerate(ocr_results):
                 translations.append({
                     'bbox': bbox,
                     'original': original_text,
-                    'translated': translated_texts[i],
+                    'translated': original_text,  # Keep original for word-by-word view
                     'confidence': confidence
                 })
             
-            total_time = time.time() - start_time
-            
-            # Send results back to UI
-            self.result_queue.put({
+            # Add the full translation as metadata
+            # The overlay will use this for the "Full Text" tab
+            result_data = {
                 'type': 'result',
                 'region': region,
                 'texts': translations,
+                'full_translation': translated_full,  # Full sentence translation
                 'timing': {
                     'capture': capture_time,
                     'ocr': ocr_time,
                     'translation': translate_time,
-                    'total': total_time
+                    'total': time.time() - start_time
                 }
-            })
+            }
+            
+            total_time = time.time() - start_time
+            
+            # Send results back to UI
+            self.result_queue.put(result_data)
             
             print(f"Processing complete: {total_time:.3f}s (capture: {capture_time:.3f}s, "
                   f"OCR: {ocr_time:.3f}s, translation: {translate_time:.3f}s)")
@@ -188,6 +243,7 @@ class ProcessingPipeline(Process):
                 # Wait for commands from UI (with timeout to allow clean shutdown)
                 if not self.command_queue.empty():
                     command = self.command_queue.get(timeout=0.1)
+                    print(f"DEBUG: Pipeline received command: {command['type']}")
                     
                     if command['type'] == 'process_region':
                         self.process_region(command['region'])

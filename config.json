@@ -1,0 +1,7 @@
+{
+  "gemini_api_key": "AIzaSyC_Fu1fQULdfKII2t9cSQNklYegKETio8M",
+  "translation_engine": "gemini",
+  "custom_prompt": "Dịch văn bản sau sang tiếng Việt theo chuyên ngành developer",
+  "source_lang": "en",
+  "target_lang": "vi"
+}
