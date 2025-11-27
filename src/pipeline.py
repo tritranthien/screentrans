@@ -252,6 +252,9 @@ class ProcessingPipeline(Process):
                         print("Shutdown command received")
                         self.running = False
                         break
+                    
+                    elif command['type'] == 'reload_config':
+                        self.reload_config()
                 
                 else:
                     # Small sleep to prevent busy waiting
@@ -266,3 +269,27 @@ class ProcessingPipeline(Process):
             self.screen_capture.close()
         
         print("Processing pipeline stopped")
+    
+    def reload_config(self):
+        """Reload configuration and re-initialize translator"""
+        print("Reloading pipeline configuration...")
+        try:
+            from translator import Translator
+            import json
+            import os
+            
+            # Load config to get languages
+            config_path = os.path.join(os.path.dirname(__file__), '..', 'config.json')
+            if os.path.exists(config_path):
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                    self.source_lang = config.get('source_lang', self.source_lang)
+                    self.target_lang = config.get('target_lang', self.target_lang)
+            
+            # Re-create translator
+            self.translator = Translator(source_lang=self.source_lang, target_lang=self.target_lang)
+            
+            print(f"✓ Translator re-initialized: {self.source_lang} -> {self.target_lang}")
+            
+        except Exception as e:
+            print(f"Error reloading config in pipeline: {e}")

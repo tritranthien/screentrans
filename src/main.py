@@ -167,7 +167,28 @@ class ScreenTranslatorApp:
         from ui.settings import SettingsDialog
         
         dialog = SettingsDialog()
+        dialog.settings_saved.connect(self.on_settings_saved)
         dialog.exec()
+    
+    def on_settings_saved(self):
+        """Handle settings saved event"""
+        print("Settings saved, reloading configuration...")
+        
+        # Reload config to get new languages
+        import json
+        try:
+            config_path = os.path.join(os.path.dirname(__file__), '..', 'config.json')
+            if os.path.exists(config_path):
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                    self.source_lang = config.get('source_lang', self.source_lang)
+                    self.target_lang = config.get('target_lang', self.target_lang)
+                    print(f"Updated languages: {self.source_lang} -> {self.target_lang}")
+        except Exception as e:
+            print(f"Error reloading config in main app: {e}")
+            
+        # Send reload command to pipeline
+        self.command_queue.put({'type': 'reload_config'})
     
     def toggle_capture_button(self):
         """Toggle capture button visibility"""

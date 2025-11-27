@@ -5,7 +5,7 @@ Settings dialog for Screen Translator
 from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, 
                              QLineEdit, QTextEdit, QPushButton, QComboBox, 
                              QGroupBox, QFormLayout, QMessageBox, QInputDialog)
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QFont
 import json
 import os
@@ -175,11 +175,14 @@ class SettingsDialog(QDialog):
         save_btn = QPushButton("💾 Lưu")
         save_btn.clicked.connect(self.save_settings)
         save_btn.setStyleSheet("background-color: #4CAF50; color: white; padding: 8px; font-weight: bold;")
-        save_btn.setMinimumWidth(100)
+        save_btn.setFixedWidth(120)
+        save_btn.setFixedHeight(40)
         
         cancel_btn = QPushButton("❌ Hủy")
         cancel_btn.clicked.connect(self.reject)
-        cancel_btn.setMinimumWidth(100)
+        cancel_btn.setStyleSheet("padding: 8px;")
+        cancel_btn.setFixedWidth(120)
+        cancel_btn.setFixedHeight(40)
         
         button_layout.addStretch()
         button_layout.addWidget(save_btn)
@@ -268,6 +271,8 @@ class SettingsDialog(QDialog):
             if self.context_combo.count() == 0:
                 self.prompt_input.clear()
     
+    settings_saved = pyqtSignal()
+
     def save_settings(self):
         """Save settings and close dialog"""
         # Update config
@@ -285,9 +290,11 @@ class SettingsDialog(QDialog):
         
         # Save to file
         if self.save_config():
+            # Emit signal to notify app to reload settings
+            self.settings_saved.emit()
+            
             QMessageBox.information(self, "Thành công", 
-                                  "✓ Cài đặt đã được lưu!\n\n"
-                                  "⚠ Vui lòng khởi động lại ứng dụng để áp dụng thay đổi.")
+                                  "✓ Cài đặt đã được lưu và áp dụng!")
             self.accept()
         else:
             QMessageBox.critical(self, "Lỗi", "Không thể lưu cài đặt!")
