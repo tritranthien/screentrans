@@ -272,24 +272,48 @@ class ProcessingPipeline(Process):
     
     def reload_config(self):
         """Reload configuration and re-initialize translator"""
-        print("Reloading pipeline configuration...")
+        print("\n" + "="*60)
+        print("RELOADING CONFIGURATION")
+        print("="*60)
         try:
             from translator import Translator
             import json
             import os
             
-            # Load config to get languages
+            # Load config to get all settings
             config_path = os.path.join(os.path.dirname(__file__), '..', 'config.json')
             if os.path.exists(config_path):
                 with open(config_path, 'r', encoding='utf-8') as f:
                     config = json.load(f)
                     self.source_lang = config.get('source_lang', self.source_lang)
                     self.target_lang = config.get('target_lang', self.target_lang)
+                    
+                    # Log the configuration being loaded
+                    print(f"Config loaded from: {config_path}")
+                    print(f"  Translation Engine: {config.get('translation_engine', 'google')}")
+                    print(f"  Source Language: {self.source_lang}")
+                    print(f"  Target Language: {self.target_lang}")
+                    prompt = config.get('custom_prompt', '')
+                    print(f"  Custom Prompt: {prompt[:60]}{'...' if len(prompt) > 60 else ''}")
             
-            # Re-create translator
+            # IMPORTANT: Delete old translator instance first
+            # This ensures we're not holding onto old configuration
+            if self.translator:
+                del self.translator
+                print("Old translator instance deleted")
+            
+            # Create a completely new Translator instance
+            # This forces the Translator to reload its config from disk,
+            # picking up changes to translation_engine, gemini_api_key, and custom_prompt
             self.translator = Translator(source_lang=self.source_lang, target_lang=self.target_lang)
             
-            print(f"✓ Translator re-initialized: {self.source_lang} -> {self.target_lang}")
+            print(f"\n✓ Translator re-initialized successfully!")
+            print(f"  Active Engine: {self.translator.engine_type}")
+            print(f"  Languages: {self.source_lang} -> {self.target_lang}")
+            print("="*60 + "\n")
             
         except Exception as e:
-            print(f"Error reloading config in pipeline: {e}")
+            print(f"❌ Error reloading config in pipeline: {e}")
+            import traceback
+            traceback.print_exc()
+            print("="*60 + "\n")

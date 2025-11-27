@@ -46,6 +46,7 @@ test_images/
 screenshots/
 
 # Configuration and Logs (Sensitive)
-config.json
 ocr_log.txt
 *.log
+
+config.json

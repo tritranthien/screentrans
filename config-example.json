@@ -1,7 +1,7 @@
 {
-  "gemini_api_key": "AIzaSyDtZhummZ63JSVnqgMu4DWB9ZoSgv01XSo",
+  "gemini_api_key": "yourkey",
   "translation_engine": "gemini",
-  "custom_prompt": "Dịch theo văn phong chuyên cho developer",
+  "custom_prompt": "Dịch văn bản sau sang tiếng Việt theo chuyên ngàng logistic",
   "source_lang": "en",
   "target_lang": "vi",
   "hotkey": "Ctrl+J",
@@ -11,7 +11,6 @@
     "Kỹ thuật": "Dịch văn bản kỹ thuật sau sang tiếng Việt chuyên nghiệp, chính xác:",
     "Hài hước": "Dịch văn bản sau một cách hài hước, dễ hiểu:",
     "Tóm tắt": "Tóm tắt nội dung văn bản sau bằng tiếng Việt:",
-    "logistic": "Dịch văn bản sau sang tiếng Việt theo chuyên ngàng logistic",
-    "dev": "Dịch theo văn phong chuyên cho developer"
+    "logistic": "Dịch văn bản sau sang tiếng Việt theo chuyên ngàng logistic"
   }
 }

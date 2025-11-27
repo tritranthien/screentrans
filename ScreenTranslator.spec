@@ -2,10 +2,10 @@
 
 
 a = Analysis(
-    ['C:\\Users\\t480\\Desktop\\person\\screentrans\\src\\main.py'],
-    pathex=['C:\\Users\\t480\\Desktop\\person\\screentrans\\src'],
+    ['C:\\Users\\Admin\\Desktop\\screentrans\\screentrans\\src\\main.py'],
+    pathex=['C:\\Users\\Admin\\Desktop\\screentrans\\screentrans\\src'],
     binaries=[],
-    datas=[('C:\\Users\\t480\\Desktop\\person\\screentrans\\config.json', '.'), ('C:\\Users\\t480\\Desktop\\person\\screentrans\\src', 'src')],
+    datas=[('C:\\Users\\Admin\\Desktop\\screentrans\\screentrans\\config.json', '.'), ('C:\\Users\\Admin\\Desktop\\screentrans\\screentrans\\src', 'src')],
     hiddenimports=['PyQt6.QtCore', 'PyQt6.QtGui', 'PyQt6.QtWidgets', 'PIL', 'PIL.Image', 'cv2', 'numpy', 'pytesseract', 'deep_translator', 'google.generativeai', 'mss', 'multiprocessing', 'queue'],
     hookspath=[],
     hooksconfig={},

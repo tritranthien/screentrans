@@ -1036,3 +1036,570 @@ COMBINED TEXT:
 
 Timestamp: 2025-11-27 16:38:04
 
+
+============================================================
+OCR DETECTED 24 TEXT SEGMENTS:
+============================================================
+1. 'Transform' (confidence: 0.95)
+2. 'API' (confidence: 0.88)
+3. 'development' (confidence: 0.96)
+4. 'from' (confidence: 0.96)
+5. 'an' (confidence: 0.96)
+6. 'individual' (confidence: 0.95)
+7. 'to' (confidence: 0.95)
+8. 'a' (confidence: 0.95)
+9. 'team' (confidence: 0.96)
+10. 'sport.' (confidence: 0.96)
+11. 'Get' (confidence: 0.96)
+12. 'to' (confidence: 0.96)
+13. 'that' (confidence: 0.96)
+14. 'first' (confidence: 0.96)
+15. 'API' (confidence: 0.94)
+16. 'call' (confidence: 0.96)
+17. 'faster,' (confidence: 0.95)
+18. 'improve' (confidence: 0.95)
+19. 'developer' (confidence: 0.93)
+20. 'onboarding,' (confidence: 0.91)
+21. 'and' (confidence: 0.96)
+22. 'increase' (confidence: 0.96)
+23. 'API' (confidence: 0.91)
+24. 'discoverability.' (confidence: 0.89)
+
+COMBINED TEXT:
+>>> Transform API development from an individual to a team sport. Get to that first API call faster, improve developer onboarding, and increase API discoverability.
+============================================================
+
+Timestamp: 2025-11-27 21:05:03
+
+
+============================================================
+OCR DETECTED 22 TEXT SEGMENTS:
+============================================================
+1. 'Transform' (confidence: 0.95)
+2. 'API' (confidence: 0.91)
+3. 'development' (confidence: 0.95)
+4. 'from' (confidence: 0.96)
+5. 'an' (confidence: 0.96)
+6. 'individual' (confidence: 0.96)
+7. 'to' (confidence: 0.95)
+8. 'a' (confidence: 0.95)
+9. 'team' (confidence: 0.96)
+10. 'sport.' (confidence: 0.96)
+11. 'Get' (confidence: 0.96)
+12. 'to' (confidence: 0.96)
+13. 'that' (confidence: 0.96)
+14. 'first' (confidence: 0.96)
+15. 'API' (confidence: 0.93)
+16. 'call' (confidence: 0.96)
+17. 'faster,' (confidence: 0.96)
+18. 'improve' (confidence: 0.96)
+19. 'and' (confidence: 0.96)
+20. 'increase' (confidence: 0.96)
+21. 'API' (confidence: 0.95)
+22. 'discoverability.' (confidence: 0.89)
+
+COMBINED TEXT:
+>>> Transform API development from an individual to a team sport. Get to that first API call faster, improve and increase API discoverability.
+============================================================
+
+Timestamp: 2025-11-27 21:05:54
+
+
+============================================================
+OCR DETECTED 24 TEXT SEGMENTS:
+============================================================
+1. 'Transform' (confidence: 0.95)
+2. 'API' (confidence: 0.90)
+3. 'development' (confidence: 0.96)
+4. 'from' (confidence: 0.96)
+5. 'an' (confidence: 0.52)
+6. 'individual' (confidence: 0.84)
+7. 'to' (confidence: 0.96)
+8. 'a' (confidence: 0.96)
+9. 'team' (confidence: 0.96)
+10. 'sport.' (confidence: 0.96)
+11. 'Get' (confidence: 0.96)
+12. 'to' (confidence: 0.96)
+13. 'that' (confidence: 0.96)
+14. 'first' (confidence: 0.96)
+15. 'API' (confidence: 0.94)
+16. 'call' (confidence: 0.95)
+17. 'faster,' (confidence: 0.96)
+18. 'improve' (confidence: 0.96)
+19. 'develo,' (confidence: 0.60)
+20. 'nboarding,' (confidence: 0.73)
+21. 'and' (confidence: 0.96)
+22. 'increase' (confidence: 0.95)
+23. 'API' (confidence: 0.93)
+24. 'discoverability.' (confidence: 0.89)
+
+COMBINED TEXT:
+>>> Transform API development from an individual to a team sport. Get to that first API call faster, improve develo, nboarding, and increase API discoverability.
+============================================================
+
+Timestamp: 2025-11-27 21:06:38
+
+
+============================================================
+OCR DETECTED 23 TEXT SEGMENTS:
+============================================================
+1. 'Transform' (confidence: 0.95)
+2. 'API' (confidence: 0.88)
+3. 'development' (confidence: 0.96)
+4. 'from' (confidence: 0.96)
+5. 'an' (confidence: 0.96)
+6. 'individual' (confidence: 0.95)
+7. 'to' (confidence: 0.95)
+8. 'a' (confidence: 0.95)
+9. 'team' (confidence: 0.96)
+10. 'sport.' (confidence: 0.96)
+11. 'Get' (confidence: 0.96)
+12. 'to' (confidence: 0.96)
+13. 'that' (confidence: 0.96)
+14. 'first' (confidence: 0.96)
+15. 'API' (confidence: 0.93)
+16. 'call' (confidence: 0.96)
+17. 'faster,' (confidence: 0.96)
+18. 'improve' (confidence: 0.96)
+19. 'onboarding,' (confidence: 0.16)
+20. 'and' (confidence: 0.96)
+21. 'increase' (confidence: 0.96)
+22. 'API' (confidence: 0.95)
+23. 'discoverability.' (confidence: 0.89)
+
+COMBINED TEXT:
+>>> Transform API development from an individual to a team sport. Get to that first API call faster, improve onboarding, and increase API discoverability.
+============================================================
+
+Timestamp: 2025-11-27 21:20:29
+
+
+============================================================
+OCR DETECTED 23 TEXT SEGMENTS:
+============================================================
+1. 'Transform' (confidence: 0.95)
+2. 'API' (confidence: 0.89)
+3. 'development' (confidence: 0.96)
+4. 'from' (confidence: 0.93)
+5. 'an_individual' (confidence: 0.77)
+6. 'to' (confidence: 0.96)
+7. 'a' (confidence: 0.96)
+8. 'team' (confidence: 0.96)
+9. 'sport.' (confidence: 0.96)
+10. 'Get' (confidence: 0.96)
+11. 'to' (confidence: 0.96)
+12. 'that' (confidence: 0.96)
+13. 'first' (confidence: 0.96)
+14. 'API' (confidence: 0.94)
+15. 'call' (confidence: 0.95)
+16. 'faster,' (confidence: 0.96)
+17. 'improve' (confidence: 0.96)
+18. 'develo,' (confidence: 0.60)
+19. 'nboarding,' (confidence: 0.73)
+20. 'and' (confidence: 0.96)
+21. 'increase' (confidence: 0.95)
+22. 'API' (confidence: 0.93)
+23. 'discoverability.' (confidence: 0.89)
+
+COMBINED TEXT:
+>>> Transform API development from an_individual to a team sport. Get to that first API call faster, improve develo, nboarding, and increase API discoverability.
+============================================================
+
+Timestamp: 2025-11-27 21:20:54
+
+
+============================================================
+OCR DETECTED 23 TEXT SEGMENTS:
+============================================================
+1. 'Transform' (confidence: 0.95)
+2. 'API' (confidence: 0.89)
+3. 'development' (confidence: 0.96)
+4. 'from' (confidence: 0.95)
+5. 'an' (confidence: 0.96)
+6. 'individual' (confidence: 0.96)
+7. 'to' (confidence: 0.95)
+8. 'a' (confidence: 0.95)
+9. 'team' (confidence: 0.96)
+10. 'sport.' (confidence: 0.96)
+11. 'Get' (confidence: 0.96)
+12. 'to' (confidence: 0.96)
+13. 'that' (confidence: 0.96)
+14. 'first' (confidence: 0.96)
+15. 'API' (confidence: 0.93)
+16. 'call' (confidence: 0.96)
+17. 'faster,' (confidence: 0.96)
+18. 'improve' (confidence: 0.96)
+19. 'develo' (confidence: 0.07)
+20. 'and' (confidence: 0.96)
+21. 'increase' (confidence: 0.96)
+22. 'API' (confidence: 0.95)
+23. 'discoverability.' (confidence: 0.89)
+
+COMBINED TEXT:
+>>> Transform API development from an individual to a team sport. Get to that first API call faster, improve develo and increase API discoverability.
+============================================================
+
+Timestamp: 2025-11-27 21:21:17
+
+
+============================================================
+OCR DETECTED 23 TEXT SEGMENTS:
+============================================================
+1. 'Transform' (confidence: 0.95)
+2. 'API' (confidence: 0.90)
+3. 'development' (confidence: 0.96)
+4. 'from' (confidence: 0.95)
+5. 'an' (confidence: 0.95)
+6. 'individual' (confidence: 0.96)
+7. 'to' (confidence: 0.96)
+8. 'a' (confidence: 0.96)
+9. 'team' (confidence: 0.96)
+10. 'sport.' (confidence: 0.96)
+11. 'Get' (confidence: 0.96)
+12. 'to' (confidence: 0.96)
+13. 'that' (confidence: 0.96)
+14. 'first' (confidence: 0.96)
+15. 'API' (confidence: 0.93)
+16. 'call' (confidence: 0.96)
+17. 'faster,' (confidence: 0.96)
+18. 'improve' (confidence: 0.96)
+19. 'develop' (confidence: 0.20)
+20. 'and' (confidence: 0.96)
+21. 'increase' (confidence: 0.96)
+22. 'API' (confidence: 0.95)
+23. 'discoverability.' (confidence: 0.89)
+
+COMBINED TEXT:
+>>> Transform API development from an individual to a team sport. Get to that first API call faster, improve develop and increase API discoverability.
+============================================================
+
+Timestamp: 2025-11-27 21:21:31
+
+
+============================================================
+OCR DETECTED 23 TEXT SEGMENTS:
+============================================================
+1. 'Transform' (confidence: 0.95)
+2. 'API' (confidence: 0.89)
+3. 'development' (confidence: 0.96)
+4. 'from' (confidence: 0.95)
+5. 'an' (confidence: 0.95)
+6. 'individual' (confidence: 0.96)
+7. 'to' (confidence: 0.95)
+8. 'a' (confidence: 0.95)
+9. 'team' (confidence: 0.96)
+10. 'sport.' (confidence: 0.96)
+11. 'Get' (confidence: 0.96)
+12. 'to' (confidence: 0.96)
+13. 'that' (confidence: 0.96)
+14. 'first' (confidence: 0.96)
+15. 'API' (confidence: 0.93)
+16. 'call' (confidence: 0.96)
+17. 'faster,' (confidence: 0.96)
+18. 'improve' (confidence: 0.96)
+19. 'onboarding,' (confidence: 0.83)
+20. 'and' (confidence: 0.96)
+21. 'increase' (confidence: 0.96)
+22. 'API' (confidence: 0.95)
+23. 'discoverability.' (confidence: 0.89)
+
+COMBINED TEXT:
+>>> Transform API development from an individual to a team sport. Get to that first API call faster, improve onboarding, and increase API discoverability.
+============================================================
+
+Timestamp: 2025-11-27 21:22:04
+
+
+============================================================
+OCR DETECTED 26 TEXT SEGMENTS:
+============================================================
+1. 'Fewer' (confidence: 0.96)
+2. 'errors' (confidence: 0.96)
+3. 'means' (confidence: 0.96)
+4. 'higher-quality' (confidence: 0.96)
+5. 'APIs' (confidence: 0.92)
+6. 'Move' (confidence: 0.96)
+7. 'fast' (confidence: 0.96)
+8. 'to' (confidence: 0.96)
+9. 'build' (confidence: 0.96)
+10. 'quality' (confidence: 0.96)
+11. 'APIs' (confidence: 0.92)
+12. 'wien' (confidence: 0.14)
+13. 'things' (confidence: 0.96)
+14. 'by' (confidence: 0.96)
+15. 'managing' (confidence: 0.96)
+16. 'every' (confidence: 0.96)
+17. 'phase' (confidence: 0.96)
+18. 'of' (confidence: 0.96)
+19. 'the' (confidence: 0.96)
+20. 'API' (confidence: 0.95)
+21. 'workflow' (confidence: 0.96)
+22. 'together' (confidence: 0.96)
+23. 'of' (confidence: 0.57)
+24. 'a' (confidence: 0.77)
+25. 'single' (confidence: 0.96)
+26. 'platform.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> Fewer errors means higher-quality APIs Move fast to build quality APIs wien things by managing every phase of the API workflow together of a single platform.
+============================================================
+
+Timestamp: 2025-11-27 21:22:40
+
+
+============================================================
+OCR DETECTED 25 TEXT SEGMENTS:
+============================================================
+1. 'Fewer' (confidence: 0.96)
+2. 'errors' (confidence: 0.96)
+3. 'means' (confidence: 0.96)
+4. 'higher-quality' (confidence: 0.96)
+5. 'APIs' (confidence: 0.92)
+6. 'Move' (confidence: 0.96)
+7. 'fast' (confidence: 0.96)
+8. 'to' (confidence: 0.96)
+9. 'build' (confidence: 0.96)
+10. 'quality' (confidence: 0.96)
+11. 'APIs' (confidence: 0.92)
+12. 'things' (confidence: 0.96)
+13. 'by' (confidence: 0.96)
+14. 'managing' (confidence: 0.96)
+15. 'every' (confidence: 0.96)
+16. 'phase' (confidence: 0.95)
+17. 'of' (confidence: 0.95)
+18. 'the' (confidence: 0.96)
+19. 'API' (confidence: 0.95)
+20. 'workflow' (confidence: 0.96)
+21. 'together' (confidence: 0.96)
+22. 'on' (confidence: 0.95)
+23. 'a' (confidence: 0.95)
+24. 'single' (confidence: 0.96)
+25. 'platform.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> Fewer errors means higher-quality APIs Move fast to build quality APIs things by managing every phase of the API workflow together on a single platform.
+============================================================
+
+Timestamp: 2025-11-27 21:23:09
+
+
+============================================================
+OCR DETECTED 30 TEXT SEGMENTS:
+============================================================
+1. 'Move' (confidence: 0.94)
+2. 'fast' (confidence: 0.94)
+3. 'to' (confidence: 0.96)
+4. 'that' (confidence: 0.95)
+5. '200' (confidence: 0.95)
+6. 'OK' (confidence: 0.96)
+7. 'Transform' (confidence: 0.96)
+8. 'API' (confidence: 0.86)
+9. 'development' (confidence: 0.96)
+10. 'from' (confidence: 0.96)
+11. 'a' (confidence: 0.95)
+12. 'ividual' (confidence: 0.77)
+13. 'to' (confidence: 0.96)
+14. 'a' (confidence: 0.96)
+15. 'team' (confidence: 0.96)
+16. 'sport.' (confidence: 0.95)
+17. 'Get' (confidence: 0.96)
+18. 'to' (confidence: 0.96)
+19. 'that' (confidence: 0.96)
+20. 'first' (confidence: 0.96)
+21. 'API' (confidence: 0.94)
+22. 'call' (confidence: 0.96)
+23. 'faster,' (confidence: 0.95)
+24. 'improve' (confidence: 0.95)
+25. 'developer' (confidence: 0.93)
+26. 'onboarding,' (confidence: 0.92)
+27. 'and' (confidence: 0.96)
+28. 'increase' (confidence: 0.96)
+29. 'API' (confidence: 0.89)
+30. 'discoverability.' (confidence: 0.89)
+
+COMBINED TEXT:
+>>> Move fast to that 200 OK Transform API development from a ividual to a team sport. Get to that first API call faster, improve developer onboarding, and increase API discoverability.
+============================================================
+
+Timestamp: 2025-11-27 21:23:53
+
+
+============================================================
+OCR DETECTED 34 TEXT SEGMENTS:
+============================================================
+1. 'Postman' (confidence: 0.96)
+2. 'is' (confidence: 0.95)
+3. 'the' (confidence: 0.96)
+4. 'platform' (confidence: 0.95)
+5. 'where' (confidence: 0.94)
+6. 'teams' (confidence: 0.96)
+7. 'build' (confidence: 0.92)
+8. 'those' (confidence: 0.88)
+9. 'APIs' (confidence: 0.93)
+10. 'together.' (confidence: 0.96)
+11. 'With' (confidence: 0.96)
+12. 'built-in' (confidence: 0.95)
+13. 'support' (confidence: 0.96)
+14. 'for' (confidence: 0.96)
+15. 'the' (confidence: 0.96)
+16. '|' (confidence: 0.91)
+17. 'Context' (confidence: 0.91)
+18. 'Protocol' (confidence: 0.93)
+19. '(MCP),' (confidence: 0.93)
+20. 'Postman' (confidence: 0.95)
+21. 'helps' (confidence: 0.96)
+22. 'you' (confidence: 0.94)
+23. 'design,' (confidence: 0.94)
+24. 'B:' (confidence: 0.70)
+25. 'manage' (confidence: 0.96)
+26. 'APIs' (confidence: 0.93)
+27. 'that' (confidence: 0.95)
+28. 'power' (confidence: 0.97)
+29. 'both' (confidence: 0.96)
+30. 'human' (confidence: 0.96)
+31. 'workflows' (confidence: 0.96)
+32. 'and' (confidence: 0.95)
+33. 'intelligent' (confidence: 0.96)
+34. 'agents.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> Postman is the platform where teams build those APIs together. With built-in support for the | Context Protocol (MCP), Postman helps you design, B: manage APIs that power both human workflows and intelligent agents.
+============================================================
+
+Timestamp: 2025-11-27 21:24:43
+
+
+============================================================
+OCR DETECTED 46 TEXT SEGMENTS:
+============================================================
+1. 'Al-ready' (confidence: 0.91)
+2. 'APIs' (confidence: 0.91)
+3. 'in' (confidence: 0.96)
+4. '90' (confidence: 0.96)
+5. 'days' (confidence: 0.96)
+6. 'Most' (confidence: 0.96)
+7. 'APIs' (confidence: 0.90)
+8. 'aren't' (confidence: 0.49)
+9. 'bul' (confidence: 0.40)
+10. 'for' (confidence: 0.88)
+11. 'AL.' (confidence: 0.71)
+12. 'Inconsiste' (confidence: 0.27)
+13. 'gg' (confidence: 0.27)
+14. 'ecs,' (confidence: 0.07)
+15. 'hidden' (confidence: 0.93)
+16. 'changes,' (confidence: 0.96)
+17. 'and' (confidence: 0.96)
+18. 'unreliable' (confidence: 0.82)
+19. 'responses' (confidence: 0.58)
+20. 'slow' (confidence: 0.96)
+21. 'agents' (confidence: 0.95)
+22. 'down' (confidence: 0.96)
+23. 'and' (confidence: 0.96)
+24. 'stall' (confidence: 0.96)
+25. 'Get' (confidence: 0.94)
+26. 'the' (confidence: 0.93)
+27. 'playbook' (confidence: 0.96)
+28. 'for' (confidence: 0.93)
+29. 'Al-ready' (confidence: 0.91)
+30. 'deployment' (confidence: 0.95)
+31. 'in' (confidence: 0.90)
+32. '90' (confidence: 0.90)
+33. 'days,' (confidence: 0.96)
+34. 'with' (confidence: 0.94)
+35. 'APIs' (confidence: 0.92)
+36. 'that' (confidence: 0.95)
+37. 'are' (confidence: 0.96)
+38. 'structured,' (confidence: 0.96)
+39. 'tested,' (confidence: 0.94)
+40. 'and' (confidence: 0.96)
+41. 'trusted' (confidence: 0.96)
+42. 'by' (confidence: 0.93)
+43. 'both' (confidence: 0.93)
+44. 'humans' (confidence: 0.96)
+45. 'and' (confidence: 0.95)
+46. 'agents.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> Al-ready APIs in 90 days Most APIs aren't bul for AL. Inconsiste gg ecs, hidden changes, and unreliable responses slow agents down and stall Get the playbook for Al-ready deployment in 90 days, with APIs that are structured, tested, and trusted by both humans and agents.
+============================================================
+
+Timestamp: 2025-11-27 21:25:32
+
+
+============================================================
+OCR DETECTED 29 TEXT SEGMENTS:
+============================================================
+1. 'Move' (confidence: 0.94)
+2. 'fast' (confidence: 0.94)
+3. 'to' (confidence: 0.96)
+4. 'that' (confidence: 0.95)
+5. '200' (confidence: 0.95)
+6. 'OK' (confidence: 0.96)
+7. 'Transform' (confidence: 0.95)
+8. 'API' (confidence: 0.91)
+9. 'development' (confidence: 0.96)
+10. 'from' (confidence: 0.92)
+11. 'agedividual' (confidence: 0.48)
+12. 'to' (confidence: 0.96)
+13. 'a' (confidence: 0.95)
+14. 'team' (confidence: 0.95)
+15. 'sport.' (confidence: 0.96)
+16. 'Get' (confidence: 0.96)
+17. 'to' (confidence: 0.96)
+18. 'that' (confidence: 0.97)
+19. 'first' (confidence: 0.97)
+20. 'API' (confidence: 0.94)
+21. 'call' (confidence: 0.95)
+22. 'faster,' (confidence: 0.96)
+23. 'improve' (confidence: 0.93)
+24. 'developer' (confidence: 0.20)
+25. 'onboarding,' (confidence: 0.58)
+26. 'and' (confidence: 0.96)
+27. 'increase' (confidence: 0.96)
+28. 'API' (confidence: 0.91)
+29. 'discoverability.' (confidence: 0.89)
+
+COMBINED TEXT:
+>>> Move fast to that 200 OK Transform API development from agedividual to a team sport. Get to that first API call faster, improve developer onboarding, and increase API discoverability.
+============================================================
+
+Timestamp: 2025-11-27 21:27:03
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'Fewer' (confidence: 0.96)
+2. 'errors' (confidence: 0.96)
+3. 'means' (confidence: 0.96)
+4. 'higher-quality' (confidence: 0.96)
+5. 'APIs' (confidence: 0.92)
+6. 'Move' (confidence: 0.96)
+7. 'fast' (confidence: 0.96)
+8. 'to' (confidence: 0.96)
+9. 'build' (confidence: 0.96)
+10. 'quality' (confidence: 0.96)
+11. 'APIs' (confidence: 0.92)
+12. 'wit' (confidence: 0.67)
+13. 'breaking' (confidence: 0.96)
+14. 'things' (confidence: 0.96)
+15. 'by' (confidence: 0.96)
+16. 'managing' (confidence: 0.96)
+17. 'every' (confidence: 0.96)
+18. 'phase' (confidence: 0.95)
+19. 'of' (confidence: 0.95)
+20. 'the' (confidence: 0.96)
+21. 'API' (confidence: 0.95)
+22. 'workflow' (confidence: 0.96)
+23. 'together' (confidence: 0.96)
+24. 'on' (confidence: 0.95)
+25. 'a' (confidence: 0.95)
+26. 'single' (confidence: 0.96)
+27. 'platform.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> Fewer errors means higher-quality APIs Move fast to build quality APIs wit breaking things by managing every phase of the API workflow together on a single platform.
+============================================================
+
+Timestamp: 2025-11-27 21:27:33
+
