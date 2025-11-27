@@ -19,6 +19,17 @@ if hasattr(Qt.ApplicationAttribute, 'AA_UseHighDpiPixmaps'):
 # Set environment variable for Windows DPI awareness
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
+# Fix imports for PyInstaller
+if getattr(sys, 'frozen', False):
+    # If running as compiled exe
+    base_path = sys._MEIPASS
+    # Add src directory to path so imports work
+    sys.path.insert(0, os.path.join(base_path, 'src'))
+else:
+    # If running as script
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    sys.path.insert(0, base_path)
+
 from pipeline import ProcessingPipeline
 from ui.overlay import OverlayController
 from ui.snipping import SnippingWidget

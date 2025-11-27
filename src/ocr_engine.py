@@ -9,17 +9,31 @@ import cv2
 import os
 import sys
 
-# Set path to tesseract executable
-# Try common locations
-TESSERACT_CMD = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-if not os.path.exists(TESSERACT_CMD):
-    # Fallback to local app data
-    TESSERACT_CMD = os.path.expanduser(r'~\AppData\Local\Programs\Tesseract-OCR\tesseract.exe')
+# Determine path to Tesseract
+if getattr(sys, 'frozen', False):
+    # If running as compiled exe, look in the same directory as the exe
+    base_path = os.path.dirname(sys.executable)
+    bundled_tesseract = os.path.join(base_path, 'Tesseract-OCR', 'tesseract.exe')
+else:
+    # If running as script, look in project root
+    base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    bundled_tesseract = os.path.join(base_path, 'Tesseract-OCR', 'tesseract.exe')
+
+# Check bundled path first, then system paths
+if os.path.exists(bundled_tesseract):
+    TESSERACT_CMD = bundled_tesseract
+    print(f"Using bundled Tesseract at: {TESSERACT_CMD}")
+else:
+    # Try common system locations
+    TESSERACT_CMD = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    if not os.path.exists(TESSERACT_CMD):
+        # Fallback to local app data
+        TESSERACT_CMD = os.path.expanduser(r'~\AppData\Local\Programs\Tesseract-OCR\tesseract.exe')
 
 if os.path.exists(TESSERACT_CMD):
     pytesseract.pytesseract.tesseract_cmd = TESSERACT_CMD
 else:
-    print("Warning: Tesseract executable not found in standard locations.")
+    print("Warning: Tesseract executable not found. Please install Tesseract-OCR.")
 
 class OCREngine:
     """
