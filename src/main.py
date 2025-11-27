@@ -84,6 +84,9 @@ class ScreenTranslatorApp:
         self.capture_button = FloatingCaptureButton(self.start_capture)
         self.capture_button.show()
         
+        # Setup global hotkeys
+        self.setup_hotkeys()
+        
         print("Screen Translator started")
         print("Click the floating button or use tray menu to capture")
         print("Right-click the tray icon for options")
@@ -121,10 +124,15 @@ class ScreenTranslatorApp:
         # Create menu
         menu = QMenu()
         
-        # Capture action
+        # Capture region action
         capture_action = QAction("📸 Capture Region", self.app)
         capture_action.triggered.connect(self.start_capture)
         menu.addAction(capture_action)
+        
+        # Capture full screen action
+        fullscreen_action = QAction("🖥️ Capture Full Screen", self.app)
+        fullscreen_action.triggered.connect(self.capture_full_screen)
+        menu.addAction(fullscreen_action)
         
         menu.addSeparator()
         
@@ -172,6 +180,29 @@ class ScreenTranslatorApp:
         self.snipping_widget = SnippingWidget()
         self.snipping_widget.region_selected.connect(self.on_region_selected)
         self.snipping_widget.show()
+    
+    def capture_full_screen(self):
+        """Capture the entire screen and process it"""
+        print("Capturing full screen...")
+        
+        # Hide overlay temporarily
+        self.overlay_controller.hide()
+        
+        # Get screen geometry
+        screen = QApplication.primaryScreen()
+        geometry = screen.geometry()
+        device_pixel_ratio = screen.devicePixelRatio()
+        
+        # Calculate physical coordinates
+        x = 0
+        y = 0
+        width = geometry.width()
+        height = geometry.height()
+        
+        print(f"Full screen size (logical): {width}x{height}")
+        
+        # Process the full screen region
+        self.on_region_selected(x, y, width, height)
     
     def open_settings(self):
         """Open settings dialog"""
@@ -253,6 +284,43 @@ class ScreenTranslatorApp:
         
         print(f"DEBUG: Processing request sent to pipeline: {command}")
     
+    def setup_hotkeys(self):
+        """Setup global hotkeys for capture actions"""
+        import json
+        
+        # Load hotkey configuration
+        try:
+            config_path = os.path.join(os.path.dirname(__file__), '..', 'config.json')
+            if os.path.exists(config_path):
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                    
+                    # Region capture hotkey
+                    region_hotkey = config.get('hotkey', 'Ctrl+J')
+                    try:
+                        self.region_hotkey_window = HotkeyWindow(region_hotkey, self.start_capture)
+                        print(f"✓ Region capture hotkey: {region_hotkey}")
+                    except Exception as e:
+                        print(f"⚠ Could not register region hotkey '{region_hotkey}': {e}")
+                        self.region_hotkey_window = None
+                    
+                    # Full screen capture hotkey
+                    fullscreen_hotkey = config.get('fullscreen_hotkey', 'Ctrl+Shift+J')
+                    try:
+                        self.fullscreen_hotkey_window = HotkeyWindow(fullscreen_hotkey, self.capture_full_screen)
+                        print(f"✓ Full screen capture hotkey: {fullscreen_hotkey}")
+                    except Exception as e:
+                        print(f"⚠ Could not register fullscreen hotkey '{fullscreen_hotkey}': {e}")
+                        self.fullscreen_hotkey_window = None
+            else:
+                print("⚠ Config file not found, hotkeys not registered")
+                self.region_hotkey_window = None
+                self.fullscreen_hotkey_window = None
+        except Exception as e:
+            print(f"⚠ Error loading hotkey config: {e}")
+            self.region_hotkey_window = None
+            self.fullscreen_hotkey_window = None
+    
     def quit_app(self):
         """Quit the application cleanly"""
         print("Shutting down...")
@@ -261,6 +329,15 @@ class ScreenTranslatorApp:
         try:
             if hasattr(self, 'capture_button'):
                 self.capture_button.close()
+        except:
+            pass
+        
+        # Close hotkey windows
+        try:
+            if hasattr(self, 'region_hotkey_window') and self.region_hotkey_window:
+                self.region_hotkey_window.close()
+            if hasattr(self, 'fullscreen_hotkey_window') and self.fullscreen_hotkey_window:
+                self.fullscreen_hotkey_window.close()
         except:
             pass
         

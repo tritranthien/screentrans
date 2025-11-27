@@ -5,6 +5,7 @@
   "source_lang": "en",
   "target_lang": "vi",
   "hotkey": "Ctrl+J",
+  "fullscreen_hotkey": "Ctrl+Shift+J",
   "saved_contexts": {
     "Tự nhiên": "Dịch văn bản sau sang tiếng Việt một cách tự nhiên và dễ hiểu:",
     "Kiếm hiệp": "Dịch văn bản sau với văn phong kiếm hiệp, hào hùng:",

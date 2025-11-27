@@ -1,5 +1,5 @@
 {
-  "gemini_api_key": "AIzaSyDtZhummZ63JSVnqgMu4DWB9ZoSgv01XSo",
+  "gemini_api_key": "",
   "translation_engine": "gemini",
   "custom_prompt": "Dịch theo văn phong chuyên cho developer",
   "source_lang": "en",
