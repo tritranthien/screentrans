@@ -56,15 +56,42 @@ class Translator:
         try:
             import google.generativeai as genai
             
+            # Always initialize Google Translate as backup
+            self._init_google_translate(as_backup=True)
+            
             api_key = self.config.get('gemini_api_key', '')
             if not api_key:
-                print("⚠ Gemini API key not found. Falling back to Google Translate.")
-                self._init_google_translate()
+                print("⚠ Gemini API key not found. Using Google Translate.")
+                self.engine_type = 'google'
                 return
             
             genai.configure(api_key=api_key)
-            self.gemini_model = genai.GenerativeModel('gemini-pro')
-            self.translator = None  # Not using deep-translator
+            
+            # Try to use the best available model
+            # Priority: 2.0 Flash -> 2.5 Flash -> 1.5 Flash -> Pro
+            models_to_try = [
+                'gemini-2.0-flash',
+                'gemini-2.5-flash',
+                'gemini-1.5-flash',
+                'gemini-pro'
+            ]
+            
+            self.gemini_model = None
+            for model_name in models_to_try:
+                try:
+                    # Test if model is available by listing it or just creating it
+                    # Note: GenerativeModel constructor doesn't validate immediately,
+                    # but we'll use the first one in our list.
+                    self.gemini_model = genai.GenerativeModel(model_name)
+                    print(f"Selected Gemini model: {model_name}")
+                    break
+                except:
+                    continue
+            
+            if not self.gemini_model:
+                # Fallback default
+                self.gemini_model = genai.GenerativeModel('gemini-pro')
+                print("Defaulted to Gemini model: gemini-pro")
             
             print(f"Gemini AI Translator initialized: {self.source_lang} -> {self.target_lang}")
             print(f"Custom prompt: {self.custom_prompt}")
@@ -72,21 +99,27 @@ class Translator:
         except Exception as e:
             print(f"Error initializing Gemini: {e}")
             print("Falling back to Google Translate")
-            self._init_google_translate()
+            self.engine_type = 'google'
     
-    def _init_google_translate(self):
+    def _init_google_translate(self, as_backup=False):
         """Initialize Google Translate"""
         try:
             from deep_translator import GoogleTranslator
             self.translator = GoogleTranslator(source=self.source_lang, target=self.target_lang)
-            self.gemini_model = None
-            self.engine_type = 'google'
-            print(f"Google Translate initialized: {self.source_lang} -> {self.target_lang}")
+            
+            if not as_backup:
+                self.gemini_model = None
+                self.engine_type = 'google'
+                print(f"Google Translate initialized: {self.source_lang} -> {self.target_lang}")
+            else:
+                print("Google Translate initialized as backup")
+                
         except Exception as e:
             print(f"Error initializing Google Translate: {e}")
             self.translator = None
-            self.gemini_model = None
-    
+            if not as_backup:
+                self.gemini_model = None
+
     def translate(self, text: str, beam_size: int = 2) -> str:
         """
         Translate text.
@@ -107,22 +140,29 @@ class Translator:
             return self._translate_with_google(text)
         else:
             return text
-    
+
     def _translate_with_gemini(self, text: str) -> str:
         """Translate using Gemini AI"""
         try:
             # Build prompt with custom context
             prompt = f"{self.custom_prompt}\n\n{text}"
             
+            # Generate content
             response = self.gemini_model.generate_content(prompt)
-            return response.text.strip()
+            
+            # Check if response has text (might be blocked by safety filters)
+            if hasattr(response, 'text'):
+                return response.text.strip()
+            elif hasattr(response, 'parts'):
+                return response.parts[0].text.strip()
+            else:
+                print("Gemini response blocked or empty")
+                return self._translate_with_google(text)
             
         except Exception as e:
             print(f"Gemini translation error: {e}")
             # Fallback to Google Translate
-            if self.translator:
-                return self._translate_with_google(text)
-            return text
+            return self._translate_with_google(text)
     
     def _translate_with_google(self, text: str) -> str:
         """Translate using Google Translate"""

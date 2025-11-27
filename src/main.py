@@ -6,9 +6,9 @@ import sys
 import os
 import multiprocessing as mp
 from multiprocessing import Queue
-from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
-from PyQt6.QtCore import QTimer, Qt
-from PyQt6.QtGui import QIcon, QAction, QKeySequence
+from PyQt6.QtWidgets import (QApplication, QSystemTrayIcon, QMenu, QWidget)
+from PyQt6.QtGui import QIcon, QAction, QCursor, QPixmap, QPainter, QLinearGradient, QFont, QColor
+from PyQt6.QtCore import QTimer, pyqtSignal, QObject, Qt
 
 # Enable High DPI scaling
 if hasattr(Qt.ApplicationAttribute, 'AA_EnableHighDpiScaling'):
@@ -59,7 +59,8 @@ class ScreenTranslatorApp:
         
         # Create overlay controller
         self.overlay_controller = OverlayController(self.result_queue)
-        self.overlay_controller.show()
+        # Don't show overlay on startup - only show when there are results
+        # self.overlay_controller.show()
         
         # Snipping widget
         self.snipping_widget = None
@@ -67,36 +68,59 @@ class ScreenTranslatorApp:
         # Create system tray icon
         self.create_tray_icon()
         
+        # Create floating capture button
+        from ui.capture_button import FloatingCaptureButton
+        self.capture_button = FloatingCaptureButton(self.start_capture)
+        self.capture_button.show()
+        
         print("Screen Translator started")
-        print("Press Ctrl+Shift+S to capture and translate a region")
+        print("Click the floating button or use tray menu to capture")
         print("Right-click the tray icon for options")
     
     def create_tray_icon(self):
         """Create system tray icon with menu"""
         self.tray_icon = QSystemTrayIcon(self.app)
         
-        # Create icon (you can replace this with a custom icon file)
-        # For now, using a simple colored icon
-        from PyQt6.QtGui import QPixmap, QPainter
+        # Create custom icon
         pixmap = QPixmap(64, 64)
         pixmap.fill(Qt.GlobalColor.transparent)
+        
         painter = QPainter(pixmap)
-        painter.setBrush(Qt.GlobalColor.blue)
-        painter.drawEllipse(8, 8, 48, 48)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        
+        # Draw background
+        gradient = QLinearGradient(0, 0, 64, 64)
+        gradient.setColorAt(0, QColor("#3D5AFE"))
+        gradient.setColorAt(1, QColor("#651FFF"))
+        
+        painter.setBrush(gradient)
+        painter.setPen(Qt.PenStyle.NoPen)
+        painter.drawRoundedRect(4, 4, 56, 56, 12, 12)
+        
+        # Draw "文" (Language symbol)
+        painter.setPen(QColor("white"))
+        font = QFont("Arial", 32, QFont.Weight.Bold)
+        painter.setFont(font)
+        painter.drawText(pixmap.rect(), Qt.AlignmentFlag.AlignCenter, "文")
+        
         painter.end()
         
-        icon = QIcon(pixmap)
-        self.tray_icon.setIcon(icon)
+        self.tray_icon.setIcon(QIcon(pixmap))
         
         # Create menu
         menu = QMenu()
         
         # Capture action
-        capture_action = QAction("📸 Capture Region (Ctrl+Shift+S)", self.app)
+        capture_action = QAction("📸 Capture Region", self.app)
         capture_action.triggered.connect(self.start_capture)
         menu.addAction(capture_action)
         
         menu.addSeparator()
+        
+        # Toggle capture button visibility
+        self.toggle_button_action = QAction("👁 Show/Hide Capture Button", self.app)
+        self.toggle_button_action.triggered.connect(self.toggle_capture_button)
+        menu.addAction(self.toggle_button_action)
         
         # Settings action
         settings_action = QAction("⚙️ Settings", self.app)
@@ -145,6 +169,13 @@ class ScreenTranslatorApp:
         dialog = SettingsDialog()
         dialog.exec()
     
+    def toggle_capture_button(self):
+        """Toggle capture button visibility"""
+        if self.capture_button.isVisible():
+            self.capture_button.hide()
+        else:
+            self.capture_button.show()
+    
     def on_region_selected(self, x, y, width, height):
         """
         Handle region selection from snipping tool.
@@ -159,9 +190,9 @@ class ScreenTranslatorApp:
             print("DEBUG: Invalid region dimensions!")
             return
 
-        # Show overlay again
-        self.overlay_controller.show()
-        print("DEBUG: Overlay shown")
+        # Show overlay with loading state
+        self.overlay_controller.show_loading(x, y, width, height)
+        print("DEBUG: Overlay shown (loading)")
         
         # Calculate DPI scale factor
         screen = QApplication.primaryScreen()
@@ -194,6 +225,13 @@ class ScreenTranslatorApp:
         """Quit the application cleanly"""
         print("Shutting down...")
         
+        # Close capture button
+        try:
+            if hasattr(self, 'capture_button'):
+                self.capture_button.close()
+        except:
+            pass
+        
         # Send shutdown command to pipeline
         self.command_queue.put({'type': 'shutdown'})
         
@@ -206,6 +244,116 @@ class ScreenTranslatorApp:
     def run(self):
         """Run the application"""
         return self.app.exec()
+
+
+class HotkeyWindow(QWidget):
+    """Hidden window to listen for global hotkey events"""
+    
+    def __init__(self, hotkey_str, callback):
+        super().__init__()
+        self.hotkey_str = hotkey_str
+        self.callback = callback
+        self.hotkey_id = 1
+        
+        # Window setup
+        self.setWindowFlags(Qt.WindowType.Tool | Qt.WindowType.FramelessWindowHint)
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        self.setGeometry(0, 0, 1, 1)
+        self.show() # Must be shown to receive messages
+        self.hide() # But we can hide it immediately
+        
+        self.register_hotkey()
+        
+    def register_hotkey(self):
+        """Register the hotkey with Windows API"""
+        import ctypes
+        from ctypes import wintypes
+        
+        # Parse hotkey
+        parts = [p.strip() for p in self.hotkey_str.split('+')]
+        
+        # Build modifier flags
+        MOD_ALT = 0x0001
+        MOD_CONTROL = 0x0002
+        MOD_SHIFT = 0x0004
+        MOD_WIN = 0x0008
+        
+        modifiers = 0
+        vk_code = None
+        
+        for part in parts:
+            part_lower = part.lower()
+            if part_lower in ('ctrl', 'control'):
+                modifiers |= MOD_CONTROL
+            elif part_lower == 'shift':
+                modifiers |= MOD_SHIFT
+            elif part_lower == 'alt':
+                modifiers |= MOD_ALT
+            elif part_lower == 'win':
+                modifiers |= MOD_WIN
+            else:
+                # This is the key
+                if len(part) == 1:
+                    vk_code = ord(part.upper())
+                elif part_lower.startswith('f') and len(part_lower) <= 3:
+                    try:
+                        f_num = int(part_lower[1:])
+                        vk_code = 0x70 + f_num - 1
+                    except:
+                        pass
+        
+        if vk_code is None:
+            print(f"⚠ Could not parse hotkey: {self.hotkey_str}")
+            return
+            
+        try:
+            hwnd = int(self.winId())
+            user32 = ctypes.windll.user32
+            result = user32.RegisterHotKey(hwnd, self.hotkey_id, modifiers, vk_code)
+            
+            if result:
+                print(f"✓ Global hotkey registered: {self.hotkey_str}")
+            else:
+                print(f"⚠ Failed to register hotkey (Error: {ctypes.get_last_error()})")
+        except Exception as e:
+            print(f"⚠ Error registering hotkey: {e}")
+
+    def nativeEvent(self, eventType, message):
+        """Handle native Windows events"""
+        try:
+            if eventType == "windows_generic_MSG":
+                import ctypes
+                from ctypes import wintypes
+                
+                # Get message structure
+                if isinstance(message, int):
+                    msg_addr = message
+                else:
+                    # In PyQt6, message might be a sip.voidptr
+                    msg_addr = int(message)
+                
+                msg = ctypes.cast(msg_addr, ctypes.POINTER(wintypes.MSG)).contents
+                
+                # WM_HOTKEY = 0x0312
+                if msg.message == 0x0312:
+                    if msg.wParam == self.hotkey_id:
+                        print(f"Hotkey triggered: {self.hotkey_str}")
+                        self.callback()
+                        return True, 0
+        except Exception as e:
+            print(f"Error in nativeEvent: {e}")
+            
+        return super().nativeEvent(eventType, message)
+    
+    def closeEvent(self, event):
+        """Unregister hotkey on close"""
+        import ctypes
+        try:
+            hwnd = int(self.winId())
+            ctypes.windll.user32.UnregisterHotKey(hwnd, self.hotkey_id)
+        except:
+            pass
+        super().closeEvent(event)
 
 
 def main():

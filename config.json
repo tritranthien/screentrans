@@ -1,7 +1,16 @@
 {
-  "gemini_api_key": "AIzaSyC_Fu1fQULdfKII2t9cSQNklYegKETio8M",
+  "gemini_api_key": "AIzaSyDwALgSVkhU_fy30ERlEJOGyJxqJP5ISKI",
   "translation_engine": "gemini",
-  "custom_prompt": "Dịch văn bản sau sang tiếng Việt theo chuyên ngành developer",
+  "custom_prompt": "Dịch văn bản sau sang tiếng Việt theo chuyên ngàng logistic",
   "source_lang": "en",
-  "target_lang": "vi"
+  "target_lang": "vi",
+  "hotkey": "Ctrl+J",
+  "saved_contexts": {
+    "Tự nhiên": "Dịch văn bản sau sang tiếng Việt một cách tự nhiên và dễ hiểu:",
+    "Kiếm hiệp": "Dịch văn bản sau với văn phong kiếm hiệp, hào hùng:",
+    "Kỹ thuật": "Dịch văn bản kỹ thuật sau sang tiếng Việt chuyên nghiệp, chính xác:",
+    "Hài hước": "Dịch văn bản sau một cách hài hước, dễ hiểu:",
+    "Tóm tắt": "Tóm tắt nội dung văn bản sau bằng tiếng Việt:",
+    "logistic": "Dịch văn bản sau sang tiếng Việt theo chuyên ngàng logistic"
+  }
 }

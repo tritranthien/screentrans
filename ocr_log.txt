@@ -34,7 +34,7 @@ COMBINED TEXT:
 >>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
 ============================================================
 
-Timestamp: 2025-11-26 17:39:47
+Timestamp: 2025-11-27 13:47:24
 
 
 ============================================================
@@ -72,7 +72,7 @@ COMBINED TEXT:
 >>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
 ============================================================
 
-Timestamp: 2025-11-26 17:43:56
+Timestamp: 2025-11-27 13:48:41
 
 
 ============================================================
@@ -110,5 +110,929 @@ COMBINED TEXT:
 >>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
 ============================================================
 
-Timestamp: 2025-11-26 18:05:04
+Timestamp: 2025-11-27 13:50:08
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-27 13:51:46
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-27 13:53:21
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-27 13:57:09
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-27 14:02:14
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-27 14:05:25
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-27 14:07:16
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-27 14:10:58
+
+
+============================================================
+OCR DETECTED 27 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'server' (confidence: 0.96)
+3. 'behavior' (confidence: 0.96)
+4. 'requested' (confidence: 0.96)
+5. 'by' (confidence: 0.97)
+6. 'the' (confidence: 0.96)
+7. 'client.' (confidence: 0.96)
+8. 'Use' (confidence: 0.93)
+9. ''respond-async'' (confidence: 0.60)
+10. 'to' (confidence: 0.96)
+11. 'execute' (confidence: 0.96)
+12. 'the' (confidence: 0.97)
+13. 'request' (confidence: 0.96)
+14. 'asynchronously.' (confidence: 0.96)
+15. 'If' (confidence: 0.90)
+16. 'the' (confidence: 0.96)
+17. 'request' (confidence: 0.96)
+18. 'is' (confidence: 0.96)
+19. 'executed' (confidence: 0.96)
+20. 'asynchronously,' (confidence: 0.93)
+21. '‘Preference-applied:' (confidence: 0.36)
+22. 'respond-async’' (confidence: 0.68)
+23. 'is' (confidence: 0.96)
+24. 'returned' (confidence: 0.96)
+25. 'in' (confidence: 0.96)
+26. 'the' (confidence: 0.96)
+27. 'response.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, ‘Preference-applied: respond-async’ is returned in the response.
+============================================================
+
+Timestamp: 2025-11-27 14:16:00
+
+
+============================================================
+OCR DETECTED 51 TEXT SEGMENTS:
+============================================================
+1. 'Auser-defined' (confidence: 0.91)
+2. 'unique' (confidence: 0.92)
+3. 'idempotency' (confidence: 0.92)
+4. 'key' (confidence: 0.96)
+5. 'that' (confidence: 0.96)
+6. 'is' (confidence: 0.96)
+7. 'applied' (confidence: 0.96)
+8. 'to' (confidence: 0.96)
+9. 'every' (confidence: 0.96)
+10. 'asynchronous' (confidence: 0.96)
+11. 'requests' (confidence: 0.96)
+12. 'to' (confidence: 0.97)
+13. 'ensure' (confidence: 0.96)
+14. 'that' (confidence: 0.96)
+15. 'the' (confidence: 0.96)
+16. 'request' (confidence: 0.96)
+17. 'is' (confidence: 0.96)
+18. 'executed' (confidence: 0.96)
+19. 'only' (confidence: 0.96)
+20. 'once.' (confidence: 0.96)
+21. 'Only' (confidence: 0.96)
+22. 'one' (confidence: 0.95)
+23. 'request' (confidence: 0.95)
+24. 'can' (confidence: 0.96)
+25. 'be' (confidence: 0.96)
+26. 'executed' (confidence: 0.96)
+27. 'with' (confidence: 0.96)
+28. 'every' (confidence: 0.97)
+29. 'unique' (confidence: 0.96)
+30. 'idempotency' (confidence: 0.91)
+31. 'key.' (confidence: 0.96)
+32. 'Use' (confidence: 0.92)
+33. 'UUID' (confidence: 0.92)
+34. 'in' (confidence: 0.96)
+35. 'string' (confidence: 0.97)
+36. 'format' (confidence: 0.96)
+37. 'as' (confidence: 0.96)
+38. 'defined' (confidence: 0.96)
+39. 'by' (confidence: 0.96)
+40. 'RFC' (confidence: 0.96)
+41. '4122.' (confidence: 0.95)
+42. 'If' (confidence: 0.95)
+43. 'the' (confidence: 0.96)
+44. 'request' (confidence: 0.96)
+45. 'is' (confidence: 0.96)
+46. 'executed' (confidence: 0.96)
+47. 'synchronously,' (confidence: 0.96)
+48. 'this' (confidence: 0.96)
+49. 'value' (confidence: 0.96)
+50. 'is' (confidence: 0.96)
+51. 'ignored.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> Auser-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.
+============================================================
+
+Timestamp: 2025-11-27 14:20:43
+
+
+============================================================
+OCR DETECTED 0 TEXT SEGMENTS:
+============================================================
+Timestamp: 2025-11-27 14:26:48
+
+
+============================================================
+OCR DETECTED 51 TEXT SEGMENTS:
+============================================================
+1. 'Auser-defined' (confidence: 0.91)
+2. 'unique' (confidence: 0.92)
+3. 'idempotency' (confidence: 0.92)
+4. 'key' (confidence: 0.96)
+5. 'that' (confidence: 0.96)
+6. 'is' (confidence: 0.96)
+7. 'applied' (confidence: 0.96)
+8. 'to' (confidence: 0.96)
+9. 'every' (confidence: 0.96)
+10. 'asynchronous' (confidence: 0.96)
+11. 'requests' (confidence: 0.96)
+12. 'to' (confidence: 0.97)
+13. 'ensure' (confidence: 0.96)
+14. 'that' (confidence: 0.96)
+15. 'the' (confidence: 0.96)
+16. 'request' (confidence: 0.96)
+17. 'is' (confidence: 0.96)
+18. 'executed' (confidence: 0.96)
+19. 'only' (confidence: 0.96)
+20. 'once.' (confidence: 0.96)
+21. 'Only' (confidence: 0.96)
+22. 'one' (confidence: 0.95)
+23. 'request' (confidence: 0.95)
+24. 'can' (confidence: 0.96)
+25. 'be' (confidence: 0.96)
+26. 'executed' (confidence: 0.96)
+27. 'with' (confidence: 0.96)
+28. 'every' (confidence: 0.97)
+29. 'unique' (confidence: 0.96)
+30. 'idempotency' (confidence: 0.91)
+31. 'key.' (confidence: 0.96)
+32. 'Use' (confidence: 0.92)
+33. 'UUID' (confidence: 0.92)
+34. 'in' (confidence: 0.96)
+35. 'string' (confidence: 0.97)
+36. 'format' (confidence: 0.96)
+37. 'as' (confidence: 0.96)
+38. 'defined' (confidence: 0.96)
+39. 'by' (confidence: 0.96)
+40. 'RFC' (confidence: 0.96)
+41. '4122.' (confidence: 0.95)
+42. 'If' (confidence: 0.95)
+43. 'the' (confidence: 0.96)
+44. 'request' (confidence: 0.96)
+45. 'is' (confidence: 0.96)
+46. 'executed' (confidence: 0.96)
+47. 'synchronously,' (confidence: 0.96)
+48. 'this' (confidence: 0.96)
+49. 'value' (confidence: 0.96)
+50. 'is' (confidence: 0.96)
+51. 'ignored.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> Auser-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.
+============================================================
+
+Timestamp: 2025-11-27 14:27:14
+
+
+============================================================
+OCR DETECTED 13 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.69)
+2. 'limit' (confidence: 0.96)
+3. 'used' (confidence: 0.96)
+4. 'to' (confidence: 0.96)
+5. 'specify' (confidence: 0.96)
+6. 'the' (confidence: 0.96)
+7. 'number' (confidence: 0.96)
+8. 'of' (confidence: 0.96)
+9. 'results' (confidence: 0.96)
+10. 'on' (confidence: 0.95)
+11. 'a' (confidence: 0.95)
+12. 'single' (confidence: 0.96)
+13. 'page.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The limit used to specify the number of results on a single page.
+============================================================
+
+Timestamp: 2025-11-27 14:33:50
+
+
+============================================================
+OCR DETECTED 51 TEXT SEGMENTS:
+============================================================
+1. 'Auser-defined' (confidence: 0.91)
+2. 'unique' (confidence: 0.92)
+3. 'idempotency' (confidence: 0.92)
+4. 'key' (confidence: 0.96)
+5. 'that' (confidence: 0.96)
+6. 'is' (confidence: 0.96)
+7. 'applied' (confidence: 0.96)
+8. 'to' (confidence: 0.96)
+9. 'every' (confidence: 0.96)
+10. 'asynchronous' (confidence: 0.96)
+11. 'requests' (confidence: 0.96)
+12. 'to' (confidence: 0.97)
+13. 'ensure' (confidence: 0.96)
+14. 'that' (confidence: 0.96)
+15. 'the' (confidence: 0.96)
+16. 'request' (confidence: 0.96)
+17. 'is' (confidence: 0.96)
+18. 'executed' (confidence: 0.96)
+19. 'only' (confidence: 0.96)
+20. 'once.' (confidence: 0.96)
+21. 'Only' (confidence: 0.96)
+22. 'one' (confidence: 0.95)
+23. 'request' (confidence: 0.95)
+24. 'can' (confidence: 0.96)
+25. 'be' (confidence: 0.96)
+26. 'executed' (confidence: 0.96)
+27. 'with' (confidence: 0.96)
+28. 'every' (confidence: 0.97)
+29. 'unique' (confidence: 0.96)
+30. 'idempotency' (confidence: 0.91)
+31. 'key.' (confidence: 0.96)
+32. 'Use' (confidence: 0.92)
+33. 'UUID' (confidence: 0.92)
+34. 'in' (confidence: 0.96)
+35. 'string' (confidence: 0.97)
+36. 'format' (confidence: 0.96)
+37. 'as' (confidence: 0.96)
+38. 'defined' (confidence: 0.96)
+39. 'by' (confidence: 0.96)
+40. 'RFC' (confidence: 0.96)
+41. '4122.' (confidence: 0.95)
+42. 'If' (confidence: 0.95)
+43. 'the' (confidence: 0.96)
+44. 'request' (confidence: 0.96)
+45. 'is' (confidence: 0.96)
+46. 'executed' (confidence: 0.96)
+47. 'synchronously,' (confidence: 0.96)
+48. 'this' (confidence: 0.96)
+49. 'value' (confidence: 0.96)
+50. 'is' (confidence: 0.96)
+51. 'ignored.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> Auser-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.
+============================================================
+
+Timestamp: 2025-11-27 14:39:21
+
+
+============================================================
+OCR DETECTED 10 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'offset' (confidence: 0.96)
+3. 'used' (confidence: 0.96)
+4. 'for' (confidence: 0.96)
+5. 'selecting' (confidence: 0.96)
+6. 'a' (confidence: 0.96)
+7. 'specific' (confidence: 0.96)
+8. 'page' (confidence: 0.96)
+9. 'of' (confidence: 0.96)
+10. 'results.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The offset used for selecting a specific page of results.
+============================================================
+
+Timestamp: 2025-11-27 15:06:23
+
+
+============================================================
+OCR DETECTED 20 TEXT SEGMENTS:
+============================================================
+1. 'FIELDS' (confidence: 0.96)
+2. 'accountNumber' (confidence: 0.92)
+3. 'Accou]' (confidence: 0.57)
+4. '-' (confidence: 0.19)
+5. '|' (confidence: 0.92)
+6. 'a' (confidence: 0.85)
+7. 'x' (confidence: 0.63)
+8. '|' (confidence: 0.55)
+9. 'If' (confidence: 0.92)
+10. 'you' (confidence: 0.96)
+11. 'assign' (confidence: 0.96)
+12. 'accounts' (confidence: 0.96)
+13. 'tc' (confidence: 0.31)
+14. '.' (confidence: 0.50)
+15. '‘Copy' (confidence: 0.57)
+16. 'ler' (confidence: 0.92)
+17. 'for' (confidence: 0.96)
+18. 'this' (confidence: 0.96)
+19. 'customer' (confidence: 0.96)
+20. 'here.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> FIELDS accountNumber Accou] - | a x | If you assign accounts tc . ‘Copy ler for this customer here.
+============================================================
+
+Timestamp: 2025-11-27 15:43:01
+
+
+============================================================
+OCR DETECTED 36 TEXT SEGMENTS:
+============================================================
+1. 'Enter' (confidence: 0.96)
+2. 'the' (confidence: 0.96)
+3. 'legal' (confidence: 0.96)
+4. 'name' (confidence: 0.96)
+5. 'of' (confidence: 0.96)
+6. 'the' (confidence: 0.96)
+7. 'customer.' (confidence: 0.96)
+8. 'If' (confidence: 0.96)
+9. 'you' (confidence: 0.96)
+10. 'use' (confidence: 0.93)
+11. 'Auto-Generated' (confidence: 0.92)
+12. 'Numbering,' (confidence: 0.96)
+13. 'it' (confidence: 0.95)
+14. 'is' (confidence: 0.93)
+15. 'important' (confidence: 0.93)
+16. 'that' (confidence: 0.96)
+17. 'you' (confidence: 0.96)
+18. 'enter' (confidence: 0.96)
+19. 'the' (confidence: 0.96)
+20. 'customer's' (confidence: 0.96)
+21. 'name' (confidence: 0.96)
+22. 'here,' (confidence: 0.96)
+23. 'as' (confidence: 0.96)
+24. 'the' (confidence: 0.96)
+25. 'Customer' (confidence: 0.96)
+26. 'Name' (confidence: 0.96)
+27. 'field' (confidence: 0.96)
+28. 'fills' (confidence: 0.93)
+29. 'with' (confidence: 0.96)
+30. 'the' (confidence: 0.96)
+31. 'number' (confidence: 0.96)
+32. 'or' (confidence: 0.96)
+33. 'code' (confidence: 0.96)
+34. 'for' (confidence: 0.96)
+35. 'this' (confidence: 0.96)
+36. 'record.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> Enter the legal name of the customer. If you use Auto-Generated Numbering, it is important that you enter the customer's name here, as the Customer Name field fills with the number or code for this record.
+============================================================
+
+Timestamp: 2025-11-27 15:43:50
+
+
+============================================================
+OCR DETECTED 30 TEXT SEGMENTS:
+============================================================
+1. '[he' (confidence: 0.93)
+2. 'overdue' (confidence: 0.96)
+3. 'consolidated' (confidence: 0.93)
+4. 'A/R' (confidence: 0.91)
+5. 'balance' (confidence: 0.96)
+6. 'is' (confidence: 0.96)
+7. 'shown' (confidence: 0.96)
+8. 'here' (confidence: 0.96)
+9. 'with' (confidence: 0.96)
+10. 'the' (confidence: 0.96)
+11. 'balance' (confidence: 0.96)
+12. 'totals' (confidence: 0.96)
+13. 'for' (confidence: 0.96)
+14. 'each' (confidence: 0.96)
+15. 'aging' (confidence: 0.96)
+16. 'period.' (confidence: 0.96)
+17. 'These' (confidence: 0.96)
+18. 'totals' (confidence: 0.96)
+19. 'include' (confidence: 0.95)
+20. 'the' (confidence: 0.95)
+21. 'balance' (confidence: 0.96)
+22. 'from' (confidence: 0.96)
+23. 'all' (confidence: 0.96)
+24. 'the' (confidence: 0.96)
+25. 'customers' (confidence: 0.96)
+26. 'and' (confidence: 0.93)
+27. 'subcustomers' (confidence: 0.90)
+28. 'in' (confidence: 0.96)
+29. 'his' (confidence: 0.96)
+30. 'hierarchy.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> [he overdue consolidated A/R balance is shown here with the balance totals for each aging period. These totals include the balance from all the customers and subcustomers in his hierarchy.
+============================================================
+
+Timestamp: 2025-11-27 15:44:51
+
+
+============================================================
+OCR DETECTED 51 TEXT SEGMENTS:
+============================================================
+1. 'Enter' (confidence: 0.96)
+2. 'an' (confidence: 0.96)
+3. 'alternate' (confidence: 0.96)
+4. 'email' (confidence: 0.96)
+5. 'address' (confidence: 0.96)
+6. 'for' (confidence: 0.96)
+7. 'this' (confidence: 0.96)
+8. 'customer.' (confidence: 0.96)
+9. 'If' (confidence: 0.94)
+10. 'you' (confidence: 0.96)
+11. 'use' (confidence: 0.96)
+12. 'the' (confidence: 0.96)
+13. 'Capt' (confidence: 0.83)
+14. 'ically' (confidence: 0.89)
+15. 'attached' (confidence: 0.96)
+16. 'to' (confidence: 0.96)
+17. 'the' (confidence: 0.96)
+18. 'customer' (confidence: 0.96)
+19. '‘ay' (confidence: 0.73)
+20. '[a' (confidence: 0.80)
+21. 'téng' (confidence: 0.84)
+22. 'hgp' (confidence: 0.48)
+23. 'céng' (confidence: 0.91)
+24. 'ng' (confidence: 0.88)
+25. 'phai' (confidence: 0.87)
+26. 'thu' (confidence: 0.96)
+27. 'qua' (confidence: 0.96)
+28. 'han' (confidence: 0.93)
+29. 'cila' (confidence: 0.65)
+30. '[ngwoi' (confidence: 0.21)
+31. 'dé],' (confidence: 0.80)
+32. 'bao' (confidence: 0.93)
+33. 'gém' (confidence: 0.62)
+34. 'ca' (confidence: 0.87)
+35. 'record.' (confidence: 0.96)
+36. 'téna' (confidence: 0.79)
+37. 'sé' (confidence: 0.87)
+38. 'dv' (confidence: 0.68)
+39. 'cho' (confidence: 0.93)
+40. 'tirna' (confidence: 0.64)
+41. 'aiai' (confidence: 0.76)
+42. 'doan' (confidence: 0.92)
+43. 'aud' (confidence: 0.59)
+44. 'han.' (confidence: 0.94)
+45. 'Tana' (confidence: 0.80)
+46. 'nav' (confidence: 0.83)
+47. 'baoaém' (confidence: 0.69)
+48. 'sé' (confidence: 0.84)
+49. 'du' (confidence: 0.39)
+50. 'tir' (confidence: 0.37)
+51. 'Y' (confidence: 0.37)
+
+COMBINED TEXT:
+>>> Enter an alternate email address for this customer. If you use the Capt ically attached to the customer ‘ay [a téng hgp céng ng phai thu qua han cila [ngwoi dé], bao gém ca record. téna sé dv cho tirna aiai doan aud han. Tana nav baoaém sé du tir Y
+============================================================
+
+Timestamp: 2025-11-27 15:45:27
+
+
+============================================================
+OCR DETECTED 36 TEXT SEGMENTS:
+============================================================
+1. 'customer’,' (confidence: 0.75)
+2. 'to1' (confidence: 0.26)
+3. 'doan' (confidence: 0.92)
+4. 'phan' (confidence: 0.96)
+5. 'dau' (confidence: 0.96)
+6. 'Co' (confidence: 0.68)
+7. 'y' (confidence: 0.92)
+8. 'la’' (confidence: 0.76)
+9. 'Enter' (confidence: 0.96)
+10. 'an' (confidence: 0.96)
+11. 'alternate' (confidence: 0.96)
+12. 'email' (confidence: 0.96)
+13. 'address' (confidence: 0.96)
+14. 'for' (confidence: 0.96)
+15. 'this' (confidence: 0.96)
+16. 'custo!' (confidence: 0.90)
+17. 'il' (confidence: 0.76)
+18. 'address' (confidence: 0.96)
+19. 'are' (confidence: 0.96)
+20. 'automatically' (confidence: 0.96)
+21. 'attached' (confidence: 0.96)
+22. 'to' (confidence: 0.96)
+23. 'the' (confidence: 0.96)
+24. 'customer' (confidence: 0.96)
+25. 'record.' (confidence: 0.94)
+26. '“Nhap' (confidence: 0.83)
+27. 'mét' (confidence: 0.88)
+28. 'dia' (confidence: 0.96)
+29. 'chi' (confidence: 0.96)
+30. 'email' (confidence: 0.96)
+31. 'thay' (confidence: 0.95)
+32. 'thé' (confidence: 0.95)
+33. 'cho' (confidence: 0.92)
+34. 'khach' (confidence: 0.92)
+35. 'hang' (confidence: 0.96)
+36. 'nay.”' (confidence: 0.83)
+
+COMBINED TEXT:
+>>> customer’, to1 doan phan dau Co y la’ Enter an alternate email address for this custo! il address are automatically attached to the customer record. “Nhap mét dia chi email thay thé cho khach hang nay.”
+============================================================
+
+Timestamp: 2025-11-27 15:46:13
+
+
+============================================================
+OCR DETECTED 51 TEXT SEGMENTS:
+============================================================
+1. 'customer’,' (confidence: 0.91)
+2. 'to1' (confidence: 0.90)
+3. 'doan' (confidence: 0.93)
+4. 'phan' (confidence: 0.96)
+5. 'dau' (confidence: 0.96)
+6. 'Co' (confidence: 0.92)
+7. 'y' (confidence: 0.92)
+8. 'la’' (confidence: 0.91)
+9. 'Enter' (confidence: 0.96)
+10. 'an' (confidence: 0.96)
+11. 'alternate' (confidence: 0.96)
+12. 'email' (confidence: 0.95)
+13. 'address' (confidence: 0.90)
+14. 'for' (confidence: 0.96)
+15. 'this' (confidence: 0.96)
+16. 'custo!' (confidence: 0.94)
+17. 'il' (confidence: 0.95)
+18. 'Email' (confidence: 0.93)
+19. 'Replies,' (confidence: 0.96)
+20. 'email' (confidence: 0.96)
+21. 'sent' (confidence: 0.96)
+22. 'with' (confidence: 0.96)
+23. 'the' (confidence: 0.96)
+24. 'alternate' (confidence: 0.96)
+25. 'email' (confidence: 0.96)
+26. 'address' (confidence: 0.96)
+27. 'are' (confidence: 0.96)
+28. 'automatically' (confidence: 0.96)
+29. 'attached' (confidence: 0.96)
+30. 'to' (confidence: 0.96)
+31. 'the' (confidence: 0.96)
+32. 'customer' (confidence: 0.96)
+33. 'address' (confidence: 0.93)
+34. 'are' (confidence: 0.96)
+35. 'automatically' (confidence: 0.96)
+36. 'attached' (confidence: 0.96)
+37. 'to' (confidence: 0.96)
+38. 'the' (confidence: 0.96)
+39. 'customer' (confidence: 0.96)
+40. 'record.' (confidence: 0.93)
+41. '“Nhap' (confidence: 0.59)
+42. 'mét' (confidence: 0.74)
+43. 'dia' (confidence: 0.96)
+44. 'chi' (confidence: 0.96)
+45. 'email' (confidence: 0.95)
+46. 'thay' (confidence: 0.96)
+47. 'thé' (confidence: 0.96)
+48. 'cho' (confidence: 0.93)
+49. 'khach' (confidence: 0.88)
+50. 'hang' (confidence: 0.96)
+51. 'nay.”' (confidence: 0.93)
+
+COMBINED TEXT:
+>>> customer’, to1 doan phan dau Co y la’ Enter an alternate email address for this custo! il Email Replies, email sent with the alternate email address are automatically attached to the customer address are automatically attached to the customer record. “Nhap mét dia chi email thay thé cho khach hang nay.”
+============================================================
+
+Timestamp: 2025-11-27 15:46:34
+
+
+============================================================
+OCR DETECTED 10 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'offset' (confidence: 0.95)
+3. 'used' (confidence: 0.96)
+4. 'for' (confidence: 0.96)
+5. 'selecting' (confidence: 0.96)
+6. 'a' (confidence: 0.96)
+7. 'specific' (confidence: 0.96)
+8. 'page' (confidence: 0.97)
+9. 'of' (confidence: 0.96)
+10. 'results.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The offset used for selecting a specific page of results.
+============================================================
+
+Timestamp: 2025-11-27 16:05:43
+
+
+============================================================
+OCR DETECTED 7 TEXT SEGMENTS:
+============================================================
+1. '|' (confidence: 0.65)
+2. 'of' (confidence: 0.95)
+3. 'results' (confidence: 0.95)
+4. 'on' (confidence: 0.89)
+5. 'a' (confidence: 0.89)
+6. 'single' (confidence: 0.96)
+7. 'page.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> | of results on a single page.
+============================================================
+
+Timestamp: 2025-11-27 16:12:23
+
+
+============================================================
+OCR DETECTED 2 TEXT SEGMENTS:
+============================================================
+1. 'kr' (confidence: 0.71)
+2. 'results.' (confidence: 0.94)
+
+COMBINED TEXT:
+>>> kr results.
+============================================================
+
+Timestamp: 2025-11-27 16:12:34
+
+
+============================================================
+OCR DETECTED 9 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'search' (confidence: 0.96)
+3. 'query' (confidence: 0.96)
+4. 'that' (confidence: 0.96)
+5. 'is' (confidence: 0.96)
+6. 'used' (confidence: 0.96)
+7. 'to' (confidence: 0.95)
+8. 'filter' (confidence: 0.96)
+9. 'results.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The search query that is used to filter results.
+============================================================
+
+Timestamp: 2025-11-27 16:17:21
+
+
+============================================================
+OCR DETECTED 10 TEXT SEGMENTS:
+============================================================
+1. 'The' (confidence: 0.96)
+2. 'offset' (confidence: 0.95)
+3. 'used' (confidence: 0.96)
+4. 'for' (confidence: 0.96)
+5. 'selecting' (confidence: 0.96)
+6. 'a' (confidence: 0.96)
+7. 'specific' (confidence: 0.96)
+8. 'page' (confidence: 0.96)
+9. 'of' (confidence: 0.96)
+10. 'results.' (confidence: 0.96)
+
+COMBINED TEXT:
+>>> The offset used for selecting a specific page of results.
+============================================================
+
+Timestamp: 2025-11-27 16:38:04
 

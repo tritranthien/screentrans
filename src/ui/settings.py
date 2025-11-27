@@ -4,7 +4,7 @@ Settings dialog for Screen Translator
 
 from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, 
                              QLineEdit, QTextEdit, QPushButton, QComboBox, 
-                             QGroupBox, QFormLayout, QMessageBox)
+                             QGroupBox, QFormLayout, QMessageBox, QInputDialog)
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 import json
@@ -20,10 +20,19 @@ class SettingsDialog(QDialog):
         super().__init__(parent)
         self.setWindowTitle("Settings - Screen Translator")
         self.setMinimumWidth(600)
-        self.setMinimumHeight(500)
+        self.setMinimumHeight(600)
         
         self.config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'config.json')
         self.config = self.load_config()
+        
+        # Load saved contexts or initialize defaults
+        self.saved_contexts = self.config.get('saved_contexts', {
+            "Tự nhiên": "Dịch văn bản sau sang tiếng Việt một cách tự nhiên và dễ hiểu:",
+            "Kiếm hiệp": "Dịch văn bản sau với văn phong kiếm hiệp, hào hùng:",
+            "Kỹ thuật": "Dịch văn bản kỹ thuật sau sang tiếng Việt chuyên nghiệp, chính xác:",
+            "Hài hước": "Dịch văn bản sau một cách hài hước, dễ hiểu:",
+            "Tóm tắt": "Tóm tắt nội dung văn bản sau bằng tiếng Việt:"
+        })
         
         self.init_ui()
     
@@ -41,12 +50,16 @@ class SettingsDialog(QDialog):
             'gemini_api_key': '',
             'custom_prompt': 'Dịch văn bản sau sang tiếng Việt một cách tự nhiên và dễ hiểu:',
             'source_lang': 'en',
-            'target_lang': 'vi'
+            'target_lang': 'vi',
+            'saved_contexts': {}
         }
     
     def save_config(self):
         """Save configuration to file"""
         try:
+            # Update contexts in config
+            self.config['saved_contexts'] = self.saved_contexts
+            
             with open(self.config_path, 'w', encoding='utf-8') as f:
                 json.dump(self.config, f, indent=2, ensure_ascii=False)
             return True
@@ -103,36 +116,37 @@ class SettingsDialog(QDialog):
         
         gemini_layout.addLayout(api_key_layout)
         
-        # Custom Prompt
-        prompt_label = QLabel("Custom Prompt (Context cho AI):")
+        # Context Management
+        context_label = QLabel("Context (Ngữ cảnh dịch):")
+        gemini_layout.addWidget(context_label)
+        
+        context_controls = QHBoxLayout()
+        
+        self.context_combo = QComboBox()
+        self.context_combo.addItems(list(self.saved_contexts.keys()))
+        self.context_combo.setPlaceholderText("Chọn ngữ cảnh...")
+        self.context_combo.currentTextChanged.connect(self.on_context_changed)
+        
+        add_context_btn = QPushButton("➕ Thêm")
+        add_context_btn.clicked.connect(self.add_context)
+        
+        del_context_btn = QPushButton("🗑 Xóa")
+        del_context_btn.clicked.connect(self.delete_context)
+        
+        context_controls.addWidget(self.context_combo, 1)
+        context_controls.addWidget(add_context_btn)
+        context_controls.addWidget(del_context_btn)
+        
+        gemini_layout.addLayout(context_controls)
+        
+        # Custom Prompt Input
         self.prompt_input = QTextEdit()
-        self.prompt_input.setPlaceholderText("Ví dụ:\n- Dịch văn bản sau với văn phong kiếm hiệp:\n- Dịch văn bản kỹ thuật sau sang tiếng Việt chuyên nghiệp:")
+        self.prompt_input.setPlaceholderText("Nhập prompt cho AI...")
         self.prompt_input.setMaximumHeight(100)
         self.prompt_input.setText(self.config.get('custom_prompt', ''))
+        self.prompt_input.textChanged.connect(self.save_current_context_text)
         
-        gemini_layout.addWidget(prompt_label)
         gemini_layout.addWidget(self.prompt_input)
-        
-        # Prompt examples
-        examples_label = QLabel("💡 Gợi ý prompts:")
-        examples_label.setFont(QFont("Arial", 9))
-        gemini_layout.addWidget(examples_label)
-        
-        examples_layout = QHBoxLayout()
-        
-        example_btns = [
-            ("Tự nhiên", "Dịch văn bản sau sang tiếng Việt một cách tự nhiên và dễ hiểu:"),
-            ("Kiếm hiệp", "Dịch văn bản sau với văn phong kiếm hiệp, hào hùng:"),
-            ("Kỹ thuật", "Dịch văn bản kỹ thuật sau sang tiếng Việt chuyên nghiệp, chính xác:"),
-            ("Hài hước", "Dịch văn bản sau một cách hài hước, dễ hiểu:")
-        ]
-        
-        for label, prompt in example_btns:
-            btn = QPushButton(label)
-            btn.clicked.connect(lambda checked, p=prompt: self.prompt_input.setText(p))
-            examples_layout.addWidget(btn)
-        
-        gemini_layout.addLayout(examples_layout)
         
         self.gemini_group.setLayout(gemini_layout)
         layout.addWidget(self.gemini_group)
@@ -161,12 +175,16 @@ class SettingsDialog(QDialog):
         save_btn = QPushButton("💾 Lưu")
         save_btn.clicked.connect(self.save_settings)
         save_btn.setStyleSheet("background-color: #4CAF50; color: white; padding: 8px; font-weight: bold;")
+        save_btn.setMinimumWidth(100)
         
         cancel_btn = QPushButton("❌ Hủy")
         cancel_btn.clicked.connect(self.reject)
+        cancel_btn.setMinimumWidth(100)
         
+        button_layout.addStretch()
         button_layout.addWidget(save_btn)
         button_layout.addWidget(cancel_btn)
+        button_layout.addStretch()
         
         layout.addLayout(button_layout)
         
@@ -174,6 +192,13 @@ class SettingsDialog(QDialog):
         
         # Update UI based on engine
         self.on_engine_changed()
+        
+        # Set initial context selection if matches current prompt
+        current_prompt = self.config.get('custom_prompt', '')
+        for name, prompt in self.saved_contexts.items():
+            if prompt == current_prompt:
+                self.context_combo.setCurrentText(name)
+                break
     
     def on_engine_changed(self):
         """Handle engine selection change"""
@@ -197,6 +222,51 @@ class SettingsDialog(QDialog):
                                "1. Tạo API key mới\n"
                                "2. Copy API key\n"
                                "3. Paste vào ô bên trái")
+    
+    def on_context_changed(self, text):
+        """Handle context selection change"""
+        if text in self.saved_contexts:
+            self.prompt_input.setText(self.saved_contexts[text])
+    
+    def save_current_context_text(self):
+        """Update the text of the currently selected context"""
+        current_context = self.context_combo.currentText()
+        if current_context and current_context in self.saved_contexts:
+            self.saved_contexts[current_context] = self.prompt_input.toPlainText()
+    
+    def add_context(self):
+        """Add a new context"""
+        name, ok = QInputDialog.getText(self, "Thêm Context", "Nhập tên ngữ cảnh mới:")
+        if ok and name:
+            if name in self.saved_contexts:
+                QMessageBox.warning(self, "Lỗi", "Tên ngữ cảnh đã tồn tại!")
+                return
+            
+            # Add new context with current prompt text or default
+            current_text = self.prompt_input.toPlainText()
+            self.saved_contexts[name] = current_text if current_text else "Nhập prompt cho ngữ cảnh này..."
+            
+            # Update combo box
+            self.context_combo.addItem(name)
+            self.context_combo.setCurrentText(name)
+    
+    def delete_context(self):
+        """Delete current context"""
+        current_context = self.context_combo.currentText()
+        if not current_context:
+            return
+            
+        reply = QMessageBox.question(self, "Xác nhận", 
+                                   f"Bạn có chắc muốn xóa ngữ cảnh '{current_context}'?",
+                                   QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        
+        if reply == QMessageBox.StandardButton.Yes:
+            del self.saved_contexts[current_context]
+            self.context_combo.removeItem(self.context_combo.currentIndex())
+            
+            # Clear input if no items left
+            if self.context_combo.count() == 0:
+                self.prompt_input.clear()
     
     def save_settings(self):
         """Save settings and close dialog"""
