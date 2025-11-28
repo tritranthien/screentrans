@@ -80,12 +80,15 @@ class Translator:
                 # Prioritize stable models with good quota
                 models_to_try = [
                     'gemini-2.0-flash',                 # Gemini 2.0 STABLE ⭐
+                    'gemini-2.5-flash',                 # Gemini 2.5 STABLE 🆕
                     'gemini-1.5-flash',                 # Stable, good quota
                     'gemini-1.5-flash-8b',              # Smaller, faster
-                    'gemini-2.5-flash-exp',             # Gemini 2.5 experimental 🆕
+                    'gemini-2.5-flash-exp',             # Gemini 2.5 experimental
+                    'gemini-2.5-flash-lite-preview',    # Gemini 2.5 Flash-Lite (High Quota)
+                    'gemini-2.0-flash-lite-preview',    # Gemini 2.0 Flash-Lite (High Quota)
                     'gemini-2.0-flash-exp',             # Gemini 2.0 experimental
                     'gemini-2.0-flash-thinking-exp',    # Gemini 2.0 with thinking
-                    'gemini-2.5-pro-exp',               # Gemini 2.5 Pro experimental 🆕
+                    'gemini-2.5-pro-exp',               # Gemini 2.5 Pro experimental
                     'gemini-1.5-pro',                   # High quality
                     'gemini-1.5-pro-exp-0827',          # Experimental pro
                 ]
@@ -94,12 +97,15 @@ class Translator:
                 # Prioritize stable models with good quota
                 models_to_try = [
                     'gemini-2.0-flash',                 # Gemini 2.0 STABLE ⭐
+                    'gemini-2.5-flash',                 # Gemini 2.5 STABLE 🆕
                     'gemini-1.5-flash',                 # Stable, best quota
                     'gemini-1.5-flash-8b',              # Smaller, faster
-                    'gemini-2.5-flash-exp',             # Gemini 2.5 experimental 🆕
+                    'gemini-2.5-flash-exp',             # Gemini 2.5 experimental
+                    'gemini-2.5-flash-lite-preview',    # Gemini 2.5 Flash-Lite (High Quota)
+                    'gemini-2.0-flash-lite-preview',    # Gemini 2.0 Flash-Lite (High Quota)
                     'gemini-2.0-flash-exp',             # Gemini 2.0 experimental
                     'gemini-2.0-flash-thinking-exp',    # Gemini 2.0 with thinking
-                    'gemini-2.5-pro-exp',               # Gemini 2.5 Pro experimental 🆕
+                    'gemini-2.5-pro-exp',               # Gemini 2.5 Pro experimental
                     'gemini-1.5-pro',                   # High quality
                     'gemini-pro',                       # Legacy stable
                 ]
@@ -149,7 +155,7 @@ class Translator:
             if not as_backup:
                 self.gemini_model = None
 
-    def translate(self, text: str, beam_size: int = 2, image=None) -> str:
+    def translate(self, text: str, beam_size: int = 2, image=None, prompt=None) -> str:
         """
         Translate text or image.
         
@@ -157,6 +163,7 @@ class Translator:
             text: Text to translate
             beam_size: Ignored
             image: Optional numpy array (BGR image) for Vision mode
+            prompt: Optional custom prompt override
             
         Returns:
             str: Translated text
@@ -167,15 +174,15 @@ class Translator:
         if self.engine_type == 'gemini' and self.gemini_model:
             # Use vision mode if image is provided and mode is vision
             if image is not None and hasattr(self, 'gemini_mode') and self.gemini_mode == 'vision':
-                return self._translate_with_gemini_vision(text, image)
+                return self._translate_with_gemini_vision(text, image, prompt)
             else:
-                return self._translate_with_gemini(text)
+                return self._translate_with_gemini(text, prompt)
         elif self.translator:
             return self._translate_with_google(text)
         else:
             return text
 
-    def _translate_with_gemini_vision(self, text: str, image) -> str:
+    def _translate_with_gemini_vision(self, text: str, image, prompt_override=None) -> str:
         """Translate using Gemini Vision (send image)"""
         try:
             import google.generativeai as genai
@@ -202,7 +209,8 @@ class Translator:
                 pil_image = pil_image.resize((new_width, new_height), Image.Resampling.LANCZOS)
             
             # Build prompt with custom context
-            prompt = f"{self.custom_prompt}\n\n(Hình ảnh chứa text cần dịch)"
+            base_prompt = prompt_override if prompt_override else self.custom_prompt
+            prompt = f"{base_prompt}\n\n(Hình ảnh chứa text cần dịch)"
             
             # Generate content with image
             response = self.gemini_model.generate_content([prompt, pil_image])
@@ -214,18 +222,19 @@ class Translator:
                 return response.parts[0].text.strip()
             else:
                 print("Gemini Vision response blocked or empty, falling back to text mode")
-                return self._translate_with_gemini(text)
+                return self._translate_with_gemini(text, prompt_override)
             
         except Exception as e:
             print(f"Gemini Vision translation error: {e}")
             # Fallback to text mode
-            return self._translate_with_gemini(text)
+            return self._translate_with_gemini(text, prompt_override)
 
-    def _translate_with_gemini(self, text: str) -> str:
+    def _translate_with_gemini(self, text: str, prompt_override=None) -> str:
         """Translate using Gemini AI (text only)"""
         try:
             # Build prompt with custom context
-            prompt = f"{self.custom_prompt}\n\n{text}"
+            base_prompt = prompt_override if prompt_override else self.custom_prompt
+            prompt = f"{base_prompt}\n\n{text}"
             
             # Generate content
             response = self.gemini_model.generate_content(prompt)

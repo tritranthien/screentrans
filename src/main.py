@@ -6,7 +6,7 @@ import sys
 import os
 import multiprocessing as mp
 from multiprocessing import Queue
-from PyQt6.QtWidgets import (QApplication, QSystemTrayIcon, QMenu, QWidget)
+from PyQt6.QtWidgets import (QApplication, QSystemTrayIcon, QMenu, QWidget, QDialog)
 from PyQt6.QtGui import QIcon, QAction, QCursor, QPixmap, QPainter, QLinearGradient, QFont, QColor
 from PyQt6.QtCore import QTimer, pyqtSignal, QObject, Qt
 
@@ -32,8 +32,8 @@ else:
 
 from pipeline import ProcessingPipeline
 from ui.overlay import OverlayController
+from ui.prompt_dialog import PromptDialog
 from ui.snipping import SnippingWidget
-
 
 class ScreenTranslatorApp:
     """
@@ -49,9 +49,9 @@ class ScreenTranslatorApp:
             target_lang: Target language code
         """
         self.source_lang = source_lang
-        self.source_lang = source_lang
         self.target_lang = target_lang
         self.is_scrolling_capture = False
+        self.is_prompt_capture = False
         
         # Create Qt application
         self.app = QApplication(sys.argv)
@@ -72,8 +72,6 @@ class ScreenTranslatorApp:
         
         # Create overlay controller
         self.overlay_controller = OverlayController(self.result_queue)
-        # Don't show overlay on startup - only show when there are results
-        # self.overlay_controller.show()
         
         # Snipping widget
         self.snipping_widget = None
@@ -83,11 +81,8 @@ class ScreenTranslatorApp:
         
         # Create floating capture button
         from ui.capture_button import FloatingCaptureButton
-        self.capture_button = FloatingCaptureButton(self.start_capture)
+        self.capture_button = FloatingCaptureButton(self.start_capture, self.start_prompt_capture)
         self.capture_button.show()
-        
-        # Hotkeys removed to prevent antivirus false positives
-        # self.setup_hotkeys()
         
         print("Screen Translator started")
         print("Click the floating button or use tray menu to capture")
@@ -130,6 +125,11 @@ class ScreenTranslatorApp:
         capture_action = QAction("📸 Capture Region", self.app)
         capture_action.triggered.connect(self.start_capture)
         menu.addAction(capture_action)
+        
+        # Capture & Ask action
+        ask_action = QAction("❓ Capture & Ask", self.app)
+        ask_action.triggered.connect(self.start_prompt_capture)
+        menu.addAction(ask_action)
         
         fullscreen_action = QAction("🖥️ Capture Full Screen", self.app)
         fullscreen_action.triggered.connect(self.capture_full_screen)
@@ -179,6 +179,7 @@ class ScreenTranslatorApp:
         """Start the region selection process"""
         print("Starting region capture...")
         self.is_scrolling_capture = False
+        self.is_prompt_capture = False
         
         # Hide overlay temporarily
         self.overlay_controller.hide()
@@ -188,10 +189,25 @@ class ScreenTranslatorApp:
         self.snipping_widget.region_selected.connect(self.on_region_selected)
         self.snipping_widget.show()
     
+    def start_prompt_capture(self):
+        """Start capture with prompt dialog"""
+        print("Starting capture & ask...")
+        self.is_scrolling_capture = False
+        self.is_prompt_capture = True
+        
+        # Hide overlay temporarily
+        self.overlay_controller.hide()
+        
+        # Create and show snipping widget
+        self.snipping_widget = SnippingWidget()
+        self.snipping_widget.region_selected.connect(self.on_region_selected)
+        self.snipping_widget.show()
+
     def start_scrolling_capture(self):
         """Start the scrolling region selection process"""
         print("Starting scrolling capture...")
         self.is_scrolling_capture = True
+        self.is_prompt_capture = False
         
         # Hide overlay temporarily
         self.overlay_controller.hide()
@@ -205,6 +221,7 @@ class ScreenTranslatorApp:
         """Capture the entire screen and process it"""
         print("Capturing full screen...")
         self.is_scrolling_capture = False
+        self.is_prompt_capture = False
         
         # Hide overlay temporarily
         self.overlay_controller.hide()
@@ -274,6 +291,17 @@ class ScreenTranslatorApp:
             print("DEBUG: Invalid region dimensions!")
             return
 
+        # Handle Prompt Capture
+        prompt = None
+        if self.is_prompt_capture:
+            dialog = PromptDialog()
+            if dialog.exec() == QDialog.DialogCode.Accepted:
+                prompt = dialog.get_prompt()
+                print(f"User prompt: {prompt}")
+            else:
+                print("Capture cancelled by user")
+                return
+
         # Show overlay with loading state
         self.overlay_controller.show_loading(x, y, width, height)
         print("DEBUG: Overlay shown (loading)")
@@ -300,7 +328,8 @@ class ScreenTranslatorApp:
                 'y': y_phys,
                 'width': w_phys,
                 'height': h_phys
-            }
+            },
+            'prompt': prompt
         }
         self.command_queue.put(command)
         
