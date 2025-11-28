@@ -23,6 +23,10 @@ class Translator:
         self.source_lang = source_lang
         self.target_lang = target_lang
         
+        # Initialize attributes
+        self.gemini_model = None
+        self.translator = None
+        
         # Load config
         self.config = self._load_config()
         
@@ -67,14 +71,38 @@ class Translator:
             
             genai.configure(api_key=api_key)
             
-            # Try to use the best available model
-            # Priority: 2.0 Flash -> 2.5 Flash -> 1.5 Flash -> Pro
-            models_to_try = [
-                'gemini-2.0-flash',
-                'gemini-2.5-flash',
-                'gemini-1.5-flash',
-                'gemini-pro'
-            ]
+            # Get Gemini mode (vision or text)
+            self.gemini_mode = self.config.get('gemini_mode', 'vision')
+            
+            # Try to use the best available model based on mode
+            if self.gemini_mode == 'vision':
+                # Vision models support image input
+                # Prioritize stable models with good quota
+                models_to_try = [
+                    'gemini-2.0-flash',                 # Gemini 2.0 STABLE ⭐
+                    'gemini-1.5-flash',                 # Stable, good quota
+                    'gemini-1.5-flash-8b',              # Smaller, faster
+                    'gemini-2.5-flash-exp',             # Gemini 2.5 experimental 🆕
+                    'gemini-2.0-flash-exp',             # Gemini 2.0 experimental
+                    'gemini-2.0-flash-thinking-exp',    # Gemini 2.0 with thinking
+                    'gemini-2.5-pro-exp',               # Gemini 2.5 Pro experimental 🆕
+                    'gemini-1.5-pro',                   # High quality
+                    'gemini-1.5-pro-exp-0827',          # Experimental pro
+                ]
+            else:
+                # Text-only models
+                # Prioritize stable models with good quota
+                models_to_try = [
+                    'gemini-2.0-flash',                 # Gemini 2.0 STABLE ⭐
+                    'gemini-1.5-flash',                 # Stable, best quota
+                    'gemini-1.5-flash-8b',              # Smaller, faster
+                    'gemini-2.5-flash-exp',             # Gemini 2.5 experimental 🆕
+                    'gemini-2.0-flash-exp',             # Gemini 2.0 experimental
+                    'gemini-2.0-flash-thinking-exp',    # Gemini 2.0 with thinking
+                    'gemini-2.5-pro-exp',               # Gemini 2.5 Pro experimental 🆕
+                    'gemini-1.5-pro',                   # High quality
+                    'gemini-pro',                       # Legacy stable
+                ]
             
             self.gemini_model = None
             for model_name in models_to_try:
@@ -83,17 +111,18 @@ class Translator:
                     # Note: GenerativeModel constructor doesn't validate immediately,
                     # but we'll use the first one in our list.
                     self.gemini_model = genai.GenerativeModel(model_name)
-                    print(f"Selected Gemini model: {model_name}")
+                    print(f"Selected Gemini model: {model_name} (mode: {self.gemini_mode})")
                     break
                 except:
                     continue
             
             if not self.gemini_model:
                 # Fallback default
-                self.gemini_model = genai.GenerativeModel('gemini-pro')
-                print("Defaulted to Gemini model: gemini-pro")
+                self.gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+                print(f"Defaulted to Gemini model: gemini-1.5-flash (mode: {self.gemini_mode})")
             
             print(f"Gemini AI Translator initialized: {self.source_lang} -> {self.target_lang}")
+            print(f"Mode: {self.gemini_mode.upper()}")
             print(f"Custom prompt: {self.custom_prompt}")
             
         except Exception as e:
@@ -120,13 +149,14 @@ class Translator:
             if not as_backup:
                 self.gemini_model = None
 
-    def translate(self, text: str, beam_size: int = 2) -> str:
+    def translate(self, text: str, beam_size: int = 2, image=None) -> str:
         """
-        Translate text.
+        Translate text or image.
         
         Args:
             text: Text to translate
             beam_size: Ignored
+            image: Optional numpy array (BGR image) for Vision mode
             
         Returns:
             str: Translated text
@@ -135,14 +165,64 @@ class Translator:
             return text
         
         if self.engine_type == 'gemini' and self.gemini_model:
-            return self._translate_with_gemini(text)
+            # Use vision mode if image is provided and mode is vision
+            if image is not None and hasattr(self, 'gemini_mode') and self.gemini_mode == 'vision':
+                return self._translate_with_gemini_vision(text, image)
+            else:
+                return self._translate_with_gemini(text)
         elif self.translator:
             return self._translate_with_google(text)
         else:
             return text
 
+    def _translate_with_gemini_vision(self, text: str, image) -> str:
+        """Translate using Gemini Vision (send image)"""
+        try:
+            import google.generativeai as genai
+            from PIL import Image
+            import io
+            import cv2
+            
+            # Convert BGR numpy array to PIL Image
+            image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            pil_image = Image.fromarray(image_rgb)
+            
+            # Resize image if too large (WebP limit is 16383 pixels)
+            # Also reduce size to save API quota
+            max_dimension = 2048  # Reasonable size for OCR
+            width, height = pil_image.size
+            
+            if width > max_dimension or height > max_dimension:
+                # Calculate scaling factor
+                scale = min(max_dimension / width, max_dimension / height)
+                new_width = int(width * scale)
+                new_height = int(height * scale)
+                
+                print(f"Resizing image from {width}x{height} to {new_width}x{new_height}")
+                pil_image = pil_image.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            
+            # Build prompt with custom context
+            prompt = f"{self.custom_prompt}\n\n(Hình ảnh chứa text cần dịch)"
+            
+            # Generate content with image
+            response = self.gemini_model.generate_content([prompt, pil_image])
+            
+            # Check if response has text (might be blocked by safety filters)
+            if hasattr(response, 'text'):
+                return response.text.strip()
+            elif hasattr(response, 'parts'):
+                return response.parts[0].text.strip()
+            else:
+                print("Gemini Vision response blocked or empty, falling back to text mode")
+                return self._translate_with_gemini(text)
+            
+        except Exception as e:
+            print(f"Gemini Vision translation error: {e}")
+            # Fallback to text mode
+            return self._translate_with_gemini(text)
+
     def _translate_with_gemini(self, text: str) -> str:
-        """Translate using Gemini AI"""
+        """Translate using Gemini AI (text only)"""
         try:
             # Build prompt with custom context
             prompt = f"{self.custom_prompt}\n\n{text}"

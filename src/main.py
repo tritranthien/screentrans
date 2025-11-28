@@ -49,7 +49,9 @@ class ScreenTranslatorApp:
             target_lang: Target language code
         """
         self.source_lang = source_lang
+        self.source_lang = source_lang
         self.target_lang = target_lang
+        self.is_scrolling_capture = False
         
         # Create Qt application
         self.app = QApplication(sys.argv)
@@ -84,8 +86,8 @@ class ScreenTranslatorApp:
         self.capture_button = FloatingCaptureButton(self.start_capture)
         self.capture_button.show()
         
-        # Setup global hotkeys
-        self.setup_hotkeys()
+        # Hotkeys removed to prevent antivirus false positives
+        # self.setup_hotkeys()
         
         print("Screen Translator started")
         print("Click the floating button or use tray menu to capture")
@@ -129,10 +131,14 @@ class ScreenTranslatorApp:
         capture_action.triggered.connect(self.start_capture)
         menu.addAction(capture_action)
         
-        # Capture full screen action
         fullscreen_action = QAction("🖥️ Capture Full Screen", self.app)
         fullscreen_action.triggered.connect(self.capture_full_screen)
         menu.addAction(fullscreen_action)
+        
+        # Scrolling capture action
+        scroll_action = QAction("📜 Scrolling Capture", self.app)
+        scroll_action.triggered.connect(self.start_scrolling_capture)
+        menu.addAction(scroll_action)
         
         menu.addSeparator()
         
@@ -172,6 +178,20 @@ class ScreenTranslatorApp:
     def start_capture(self):
         """Start the region selection process"""
         print("Starting region capture...")
+        self.is_scrolling_capture = False
+        
+        # Hide overlay temporarily
+        self.overlay_controller.hide()
+        
+        # Create and show snipping widget
+        self.snipping_widget = SnippingWidget()
+        self.snipping_widget.region_selected.connect(self.on_region_selected)
+        self.snipping_widget.show()
+    
+    def start_scrolling_capture(self):
+        """Start the scrolling region selection process"""
+        print("Starting scrolling capture...")
+        self.is_scrolling_capture = True
         
         # Hide overlay temporarily
         self.overlay_controller.hide()
@@ -184,6 +204,7 @@ class ScreenTranslatorApp:
     def capture_full_screen(self):
         """Capture the entire screen and process it"""
         print("Capturing full screen...")
+        self.is_scrolling_capture = False
         
         # Hide overlay temporarily
         self.overlay_controller.hide()
@@ -271,8 +292,9 @@ class ScreenTranslatorApp:
         print(f"DEBUG: Region (physical): ({x_phys}, {y_phys}, {w_phys}, {h_phys})")
         
         # Send command to processing pipeline
+        command_type = 'process_scrolling_region' if self.is_scrolling_capture else 'process_region'
         command = {
-            'type': 'process_region',
+            'type': command_type,
             'region': {
                 'x': x_phys,
                 'y': y_phys,
@@ -284,42 +306,7 @@ class ScreenTranslatorApp:
         
         print(f"DEBUG: Processing request sent to pipeline: {command}")
     
-    def setup_hotkeys(self):
-        """Setup global hotkeys for capture actions"""
-        import json
-        
-        # Load hotkey configuration
-        try:
-            config_path = os.path.join(os.path.dirname(__file__), '..', 'config.json')
-            if os.path.exists(config_path):
-                with open(config_path, 'r', encoding='utf-8') as f:
-                    config = json.load(f)
-                    
-                    # Region capture hotkey
-                    region_hotkey = config.get('hotkey', 'Ctrl+J')
-                    try:
-                        self.region_hotkey_window = HotkeyWindow(region_hotkey, self.start_capture)
-                        print(f"✓ Region capture hotkey: {region_hotkey}")
-                    except Exception as e:
-                        print(f"⚠ Could not register region hotkey '{region_hotkey}': {e}")
-                        self.region_hotkey_window = None
-                    
-                    # Full screen capture hotkey
-                    fullscreen_hotkey = config.get('fullscreen_hotkey', 'Ctrl+Shift+J')
-                    try:
-                        self.fullscreen_hotkey_window = HotkeyWindow(fullscreen_hotkey, self.capture_full_screen)
-                        print(f"✓ Full screen capture hotkey: {fullscreen_hotkey}")
-                    except Exception as e:
-                        print(f"⚠ Could not register fullscreen hotkey '{fullscreen_hotkey}': {e}")
-                        self.fullscreen_hotkey_window = None
-            else:
-                print("⚠ Config file not found, hotkeys not registered")
-                self.region_hotkey_window = None
-                self.fullscreen_hotkey_window = None
-        except Exception as e:
-            print(f"⚠ Error loading hotkey config: {e}")
-            self.region_hotkey_window = None
-            self.fullscreen_hotkey_window = None
+
     
     def quit_app(self):
         """Quit the application cleanly"""
@@ -332,14 +319,7 @@ class ScreenTranslatorApp:
         except:
             pass
         
-        # Close hotkey windows
-        try:
-            if hasattr(self, 'region_hotkey_window') and self.region_hotkey_window:
-                self.region_hotkey_window.close()
-            if hasattr(self, 'fullscreen_hotkey_window') and self.fullscreen_hotkey_window:
-                self.fullscreen_hotkey_window.close()
-        except:
-            pass
+
         
         # Send shutdown command to pipeline
         self.command_queue.put({'type': 'shutdown'})
@@ -350,119 +330,10 @@ class ScreenTranslatorApp:
         # Quit Qt application
         self.app.quit()
     
+    
     def run(self):
         """Run the application"""
         return self.app.exec()
-
-
-class HotkeyWindow(QWidget):
-    """Hidden window to listen for global hotkey events"""
-    
-    def __init__(self, hotkey_str, callback):
-        super().__init__()
-        self.hotkey_str = hotkey_str
-        self.callback = callback
-        self.hotkey_id = 1
-        
-        # Window setup
-        self.setWindowFlags(Qt.WindowType.Tool | Qt.WindowType.FramelessWindowHint)
-        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-        self.setGeometry(0, 0, 1, 1)
-        self.show() # Must be shown to receive messages
-        self.hide() # But we can hide it immediately
-        
-        self.register_hotkey()
-        
-    def register_hotkey(self):
-        """Register the hotkey with Windows API"""
-        import ctypes
-        from ctypes import wintypes
-        
-        # Parse hotkey
-        parts = [p.strip() for p in self.hotkey_str.split('+')]
-        
-        # Build modifier flags
-        MOD_ALT = 0x0001
-        MOD_CONTROL = 0x0002
-        MOD_SHIFT = 0x0004
-        MOD_WIN = 0x0008
-        
-        modifiers = 0
-        vk_code = None
-        
-        for part in parts:
-            part_lower = part.lower()
-            if part_lower in ('ctrl', 'control'):
-                modifiers |= MOD_CONTROL
-            elif part_lower == 'shift':
-                modifiers |= MOD_SHIFT
-            elif part_lower == 'alt':
-                modifiers |= MOD_ALT
-            elif part_lower == 'win':
-                modifiers |= MOD_WIN
-            else:
-                # This is the key
-                if len(part) == 1:
-                    vk_code = ord(part.upper())
-                elif part_lower.startswith('f') and len(part_lower) <= 3:
-                    try:
-                        f_num = int(part_lower[1:])
-                        vk_code = 0x70 + f_num - 1
-                    except:
-                        pass
-        
-        if vk_code is None:
-            print(f"⚠ Could not parse hotkey: {self.hotkey_str}")
-            return
-            
-        try:
-            hwnd = int(self.winId())
-            user32 = ctypes.windll.user32
-            result = user32.RegisterHotKey(hwnd, self.hotkey_id, modifiers, vk_code)
-            
-            if result:
-                print(f"✓ Global hotkey registered: {self.hotkey_str}")
-            else:
-                print(f"⚠ Failed to register hotkey (Error: {ctypes.get_last_error()})")
-        except Exception as e:
-            print(f"⚠ Error registering hotkey: {e}")
-
-    def nativeEvent(self, eventType, message):
-        """Handle native Windows events"""
-        try:
-            if eventType == "windows_generic_MSG":
-                import ctypes
-                from ctypes import wintypes
-                
-                # Get message structure
-                if isinstance(message, int):
-                    msg_addr = message
-                else:
-                    # In PyQt6, message might be a sip.voidptr
-                    msg_addr = int(message)
-                
-                msg = ctypes.cast(msg_addr, ctypes.POINTER(wintypes.MSG)).contents
-                
-                # WM_HOTKEY = 0x0312
-                if msg.message == 0x0312:
-                    if msg.wParam == self.hotkey_id:
-                        print(f"Hotkey triggered: {self.hotkey_str}")
-                        self.callback()
-                        return True, 0
-        except Exception as e:
-            print(f"Error in nativeEvent: {e}")
-            
-        return super().nativeEvent(eventType, message)
-    
-    def closeEvent(self, event):
-        """Unregister hotkey on close"""
-        import ctypes
-        try:
-            hwnd = int(self.winId())
-            ctypes.windll.user32.UnregisterHotKey(hwnd, self.hotkey_id)
-        except:
-            pass
-        super().closeEvent(event)
 
 
 def main():

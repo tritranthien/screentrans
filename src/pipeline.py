@@ -175,7 +175,8 @@ class ProcessingPipeline(Process):
                 
                 # Translate ONLY the combined text (full sentence)
                 # This gives much better translation quality than word-by-word
-                translated_full = self.translator.translate(combined_text)
+                # Pass image for Vision mode
+                translated_full = self.translator.translate(combined_text, image=image)
                 
                 print(f"\nTRANSLATION:")
                 print(f"Original: {combined_text}")
@@ -227,6 +228,112 @@ class ProcessingPipeline(Process):
                 'error': str(e)
             })
     
+    def process_scrolling_region(self, region: Dict[str, int]):
+        """
+        Capture with scrolling, then OCR and translate.
+        """
+        try:
+            start_time = time.time()
+            
+            # Capture scrolling region
+            image = self.screen_capture.capture_scrolling_region(
+                region['x'], region['y'], region['width'], region['height']
+            )
+            
+            if image is None:
+                self.result_queue.put({
+                    'type': 'error',
+                    'error': 'Failed to capture scrolling region'
+                })
+                return
+            
+            capture_time = time.time() - start_time
+            
+            # The rest is similar to process_region, but we use the stitched image
+            # Perform OCR
+            ocr_start = time.time()
+            ocr_results = self.ocr_engine.detect_and_recognize(image)
+            ocr_time = time.time() - ocr_start
+            
+            # Log OCR results
+            log_lines = []
+            log_lines.append(f"\n{'='*60}")
+            log_lines.append(f"SCROLLING OCR DETECTED {len(ocr_results)} TEXT SEGMENTS:")
+            log_lines.append(f"{'='*60}")
+            
+            if ocr_results:
+                combined_text = " ".join([text for _, text, _ in ocr_results])
+                log_lines.append(f"\nCOMBINED TEXT:")
+                log_lines.append(f">>> {combined_text}")
+                log_lines.append(f"{'='*60}\n")
+            
+            for line in log_lines:
+                print(line)
+            
+            if not ocr_results:
+                print("No text detected in scrolling region")
+                self.result_queue.put({
+                    'type': 'result',
+                    'region': region,
+                    'texts': [],
+                    'timing': {
+                        'capture': capture_time,
+                        'ocr': ocr_time,
+                        'translation': 0,
+                        'total': time.time() - start_time
+                    }
+                })
+                return
+            
+            # Translate
+            translate_start = time.time()
+            translations = []
+            
+            if self.translator.is_available():
+                texts_to_translate = [text for _, text, _ in ocr_results]
+                combined_text = " ".join(texts_to_translate)
+                # Pass image for Vision mode
+                translated_full = self.translator.translate(combined_text, image=image)
+                
+                print(f"\nTRANSLATION:")
+                print(f"Original: {combined_text}")
+                print(f"Translated: {translated_full}\n")
+            else:
+                translated_full = " ".join([text for _, text, _ in ocr_results])
+            
+            translate_time = time.time() - translate_start
+            
+            # Prepare results
+            for i, (bbox, original_text, confidence) in enumerate(ocr_results):
+                translations.append({
+                    'bbox': bbox,
+                    'original': original_text,
+                    'translated': original_text,
+                    'confidence': confidence
+                })
+            
+            result_data = {
+                'type': 'result',
+                'region': region,
+                'texts': translations,
+                'full_translation': translated_full,
+                'timing': {
+                    'capture': capture_time,
+                    'ocr': ocr_time,
+                    'translation': translate_time,
+                    'total': time.time() - start_time
+                }
+            }
+            
+            self.result_queue.put(result_data)
+            
+        except Exception as e:
+            print(f"Error processing scrolling region: {e}")
+            self.result_queue.put({
+                'type': 'error',
+                'error': str(e)
+            })
+
     def run(self):
         """
         Main loop for the processing pipeline.
@@ -247,6 +354,9 @@ class ProcessingPipeline(Process):
                     
                     if command['type'] == 'process_region':
                         self.process_region(command['region'])
+                    
+                    elif command['type'] == 'process_scrolling_region':
+                        self.process_scrolling_region(command['region'])
                     
                     elif command['type'] == 'shutdown':
                         print("Shutdown command received")

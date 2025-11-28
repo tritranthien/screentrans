@@ -116,6 +116,21 @@ class SettingsDialog(QDialog):
         
         gemini_layout.addLayout(api_key_layout)
         
+        # Gemini Mode Selection
+        mode_layout = QHBoxLayout()
+        mode_label = QLabel("Gemini Mode:")
+        self.gemini_mode_combo = QComboBox()
+        self.gemini_mode_combo.addItems([
+            "Vision (Gửi ảnh - Chính xác hơn)",
+            "Text (Gửi text OCR - Nhanh hơn)"
+        ])
+        current_mode = self.config.get('gemini_mode', 'vision')
+        self.gemini_mode_combo.setCurrentIndex(0 if current_mode == 'vision' else 1)
+        
+        mode_layout.addWidget(mode_label)
+        mode_layout.addWidget(self.gemini_mode_combo)
+        gemini_layout.addLayout(mode_layout)
+        
         # Context Management
         context_label = QLabel("Context (Ngữ cảnh dịch):")
         gemini_layout.addWidget(context_label)
@@ -278,6 +293,7 @@ class SettingsDialog(QDialog):
         # Update config
         self.config['translation_engine'] = 'gemini' if self.engine_combo.currentIndex() == 1 else 'google'
         self.config['gemini_api_key'] = self.api_key_input.text().strip()
+        self.config['gemini_mode'] = 'vision' if self.gemini_mode_combo.currentIndex() == 0 else 'text'
         self.config['custom_prompt'] = self.prompt_input.toPlainText().strip()
         self.config['source_lang'] = self.source_lang_input.text().strip()
         self.config['target_lang'] = self.target_lang_input.text().strip()
